@@ -13,5 +13,10 @@ describe('<SudokuPage />', () => {
   it('renders without error', () => {
     expect(sudokuPageComponent).toHaveLength(1);
   });
+
+  it('renders <Sudoku />', () => {
+    const sudoku = findByTestAttr(wrapper, 'sudoku');
+    expect(sudoku).toHaveLength(1);
+  });
 });
 

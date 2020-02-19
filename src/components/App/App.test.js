@@ -11,7 +11,6 @@ describe('<App />', () => {
   });
 
   it('renders without error', () => {
-    
     expect(appComponent).toHaveLength(1);
   });
 });

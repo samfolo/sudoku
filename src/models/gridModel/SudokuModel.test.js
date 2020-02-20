@@ -19,11 +19,19 @@ describe(SudokuModel, () => {
 
   describe('grid rows', () => {
     test('each row contains the numbers 1-9', () => {
-      for (let i = 0; i < 9; i++) {
-        let row = testSudoku.render()[i];
-        let uniqueElements = Array.from(new Set(row));
-        return expect(uniqueElements).toHaveLength(9);
-      }
+      testSudoku.render().every(row => expect(Array.from(new Set(row))).toHaveLength(9));
+    });
+
+    test('each column contains the numbers 1-9', () => {
+      let columns = [[], [], [], [], [], [], [], [], []];
+
+      testSudoku.render().forEach((row) => {
+        row.forEach((el, i) => {
+          columns[i] = [...columns[i], el];
+        });
+      });
+
+      columns.every(column => expect(Array.from(new Set(column))).toHaveLength(9));
     });
   });
 });

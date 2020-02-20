@@ -1,6 +1,7 @@
 export default class Sudoku {
-  constructor(grid = []) {
+  constructor(grid = [], partial = []) {
     this.grid = grid;
+    this.partial = partial;
   }
 
   generateGrid = () => {
@@ -39,7 +40,43 @@ export default class Sudoku {
     return shuffledElements;
   }
 
-  render = () => {
+  renderSolution = () => {
     return this.grid;
+  }
+
+  generatePartial = difficulty => {
+    let numberOfClues;
+
+    switch (difficulty) {
+      case 'easy': numberOfClues = 36; break;
+      default: return null;
+    }
+
+    // generating random coordinates, used to place clues:
+    let clueCoordinates = [];
+
+    while (clueCoordinates.length < numberOfClues) {
+      const newCoord = [Math.floor(Math.random() * 9), Math.floor(Math.random() * 9)]
+      if (!JSON.stringify(clueCoordinates).includes(JSON.stringify(newCoord))) {
+        clueCoordinates = [...clueCoordinates, newCoord];
+      }
+    }
+    
+    // zero-padded 9 x 9 grid:
+    let partialGrid = [];
+
+    for (let y = 0; y < 9; y++) {
+      let newRow = [];
+      for (let x = 0; x < 9; x++) newRow = [...newRow, 0];
+      partialGrid = [...partialGrid, newRow];
+    }
+
+    // replacing values in the partialGrid with the values at the same coordinates of the full solution:
+    clueCoordinates.forEach(clue => partialGrid[clue[1]][clue[0]] = this.grid[clue[1]][clue[0]]);
+    this.partial = partialGrid;
+  }
+
+  renderPartial = () => {
+    return this.partial;
   }
 };

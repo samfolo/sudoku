@@ -7,7 +7,7 @@ describe(SudokuModel, () => {
   beforeEach(() => {
     testSudoku = new SudokuModel();
     testSudoku.generateGrid();
-    testGrid = testSudoku.render();
+    testGrid = testSudoku.renderSolution();
   });
 
   it('can render a 9 x 9 grid', () => {
@@ -42,9 +42,9 @@ describe(SudokuModel, () => {
     test('each sub-grid contains the numbers 1-9', () => {
       let subGrids = [[], [], [], [], [], [], [], [], []];
 
-      let firstThird = testSudoku.render().slice(0, 3);
-      let secondThird = testSudoku.render().slice(3, 6);;
-      let thirdThird = testSudoku.render().slice(6);
+      let firstThird = testSudoku.renderSolution().slice(0, 3);
+      let secondThird = testSudoku.renderSolution().slice(3, 6);;
+      let thirdThird = testSudoku.renderSolution().slice(6);
 
       firstThird.forEach(row => {
         row.forEach((el, i) => {
@@ -83,8 +83,18 @@ describe(SudokuModel, () => {
   it('renders a different grid every time', () => {
     const secondTestSudoku = new SudokuModel();
     secondTestSudoku.generateGrid();
-    const secondTestGrid = secondTestSudoku.render();
+    const secondTestGrid = secondTestSudoku.renderSolution();
 
     expect(JSON.stringify(testGrid)).not.toEqual(JSON.stringify(secondTestGrid));
+  });
+
+  describe('grids with clues', () => {
+    it('can render a version of the grid with only 36 clues', () => {
+      testSudoku.generatePartial('easy');
+      const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
+      const clues = allValues.filter(el => el !== 0);
+
+      expect(clues).toHaveLength(36)
+    });
   });
 });

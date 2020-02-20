@@ -13,4 +13,9 @@ describe('<Row />', () => {
   it('renders without error', () => {
     expect(rowComponent).toHaveLength(1);
   });
+  
+  it('renders 9 <Cell /> components', () => {
+    const cells = findByTestAttr(wrapper, 'cell');
+    expect(cells).toHaveLength(9);
+  })
 });

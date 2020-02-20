@@ -1,18 +1,20 @@
 import React from 'react';
 import Classes from './Row.module.css';
 
+import Cell from '../Cell/Cell';
+
 const Row = props => {
   return (
-    <div data-test="component-row">
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
-      <div data-test="cell" />
+    <div className={Classes.Row} data-test="component-row">
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
+      <Cell data-test="cell" />
     </div>
   )
 }

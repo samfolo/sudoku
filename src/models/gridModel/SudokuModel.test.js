@@ -16,4 +16,12 @@ describe(SudokuModel, () => {
       return expect(row).toHaveLength(9);
     });
   });
+
+  describe('grid rows', () => {
+    test('each row contains the numbers 1-9', () => {
+      const firstRow = testSudoku.render()[0];
+      let uniqueElements = Array.from(new Set(firstRow));
+      return expect(uniqueElements).toHaveLength(9);
+    });
+  });
 });

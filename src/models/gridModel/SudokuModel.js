@@ -1,5 +1,6 @@
 export default class Sudoku {
   render = () => {
-    return [...Array(9).fill(Array(9))];
+    const numbers = [...Array(9).keys()].map(el => el + 1);
+    return [...Array(9).fill(numbers)];
   }
 };

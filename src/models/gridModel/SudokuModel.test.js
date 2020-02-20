@@ -6,6 +6,7 @@ describe(SudokuModel, () => {
 
   beforeEach(() => {
     testSudoku = new SudokuModel();
+    testSudoku.generateGrid();
     testGrid = testSudoku.render();
   });
 
@@ -77,5 +78,13 @@ describe(SudokuModel, () => {
 
       subGrids.every(subGrid => expect(Array.from(new Set(subGrid))).toHaveLength(9));
     });
+  });
+
+  it('renders a different grid every time', () => {
+    const secondTestSudoku = new SudokuModel();
+    secondTestSudoku.generateGrid();
+    const secondTestGrid = secondTestSudoku.render();
+
+    expect(JSON.stringify(testGrid)).not.toEqual(JSON.stringify(secondTestGrid));
   });
 });

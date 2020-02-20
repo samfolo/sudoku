@@ -13,4 +13,9 @@ describe('<Sudoku />', () => {
   it('renders without error', () => {
     expect(sudokuComponent).toHaveLength(1);
   });
+
+  it('renders 9 <Rows />', () => {
+    const rows = findByTestAttr(wrapper, 'row');
+    expect(rows).toHaveLength(9);
+  });
 });

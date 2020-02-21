@@ -78,6 +78,7 @@ export default class SudokuModel {
   }
 
   fillCell = (coord, number) => {
-    if (number !== 'twelve' && number !== 13) this.partial[coord[1]][coord[0]] = number;
+    const validNumbers = [...Array(9).keys()].map(el => el + 1);
+    if (validNumbers.includes(number)) this.partial[coord[1]][coord[0]] = number;
   }
 };

@@ -135,6 +135,12 @@ describe(SudokuModel, () => {
         expect(testSudoku.renderPartial()[1][6]).not.toBe(13);
         expect(testSudoku.renderPartial()[1][6]).toBe(0);
       });
+
+      it('does not replace the targeted value [4, 7] with -2 when passed [4, 7] && -2', () => {
+        testSudoku.fillCell([4, 7], -2);
+        expect(testSudoku.renderPartial()[7][4]).not.toBe(-2);
+        expect(testSudoku.renderPartial()[7][4]).toBe(0);
+      });
     });
   });
 });

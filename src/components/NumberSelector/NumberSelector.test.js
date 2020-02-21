@@ -13,4 +13,9 @@ describe('<NumberSelector />', () => {
   it('renders without error', () => {
     expect(numberSelectorComponent).toHaveLength(1);
   });
+
+  it('renders a selection of numbers', () => {
+    const numbers = findByTestAttr(wrapper, 'number');
+    expect(numbers).toHaveLength(9);
+  });
 });

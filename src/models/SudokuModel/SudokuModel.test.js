@@ -139,7 +139,6 @@ describe(SudokuModel, () => {
     describe('clearCell()', () => {
       it('replaces the targeted value [5, 5] with 0 when passed [5, 5] && 8', (done) => {
         setTimeout(() => {
-          testSudoku = new SudokuModel(undefined, emptyGrid);
           testSudoku.fillCell([5, 5], 8);
           done();
         });
@@ -148,6 +147,16 @@ describe(SudokuModel, () => {
         
         testSudoku.clearCell([5, 5]);
         expect(testSudoku.renderPartial()[5][5]).toBe(0);
+      });
+    });
+
+    describe('fillPartial()', () => {
+      it('fills in all squares with the correct values', () => {
+        testSudoku.generateGrid();
+        testSudoku.fillPartial();
+        const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
+        const emptyValues = allValues.filter(value => value === 0);
+        expect(emptyValues).toHaveLength(0)
       });
     });
   });

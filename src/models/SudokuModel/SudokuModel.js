@@ -1,6 +1,6 @@
 export default class SudokuModel {
   constructor(grid = [], partial = []) {
-    this.grid = grid;
+    this.solution = grid;
     this.partial = partial;
   }
 
@@ -21,7 +21,7 @@ export default class SudokuModel {
       ...this.shuffle(grid.slice(6), 3),
     ];
     
-    this.grid = grid;
+    this.solution = grid;
   }
 
   shuffle = (elements, length) => {
@@ -40,7 +40,7 @@ export default class SudokuModel {
     return shuffledElements;
   }
 
-  renderSolution = () => this.grid;
+  renderSolution = () => this.solution;
 
   generatePartial = difficulty => {
     let numberOfClues;
@@ -67,11 +67,15 @@ export default class SudokuModel {
     }
 
     // replacing values in the partialGrid with the solution values at the selected clueCoordinates:
-    clueCoordinates.forEach(clue => partialGrid[clue[1]][clue[0]] = this.grid[clue[1]][clue[0]]);
+    clueCoordinates.forEach(clue => partialGrid[clue[1]][clue[0]] = this.solution[clue[1]][clue[0]]);
     this.partial = partialGrid;
   }
 
   renderPartial = () => this.partial;
+
+  fillPartial = () => {
+    this.partial = [...this.solution];
+  }
 
   fillCell = (coord, number) => {
     const validNumbers = [...Array(9).keys()].map(el => el + 1);

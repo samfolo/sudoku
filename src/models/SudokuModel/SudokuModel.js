@@ -68,7 +68,7 @@ export default class SudokuModel {
       partialGrid = [...partialGrid, newRow];
     }
 
-    // replacing values in the partialGrid with the values at the same coordinates of the full solution:
+    // replacing values in the partialGrid with the solution values at the selected clueCoordinates:
     clueCoordinates.forEach(clue => partialGrid[clue[1]][clue[0]] = this.grid[clue[1]][clue[0]]);
     this.partial = partialGrid;
   }
@@ -78,6 +78,6 @@ export default class SudokuModel {
   }
 
   fillCell = (coord, number) => {
-    this.partial[coord[1]][coord[0]] = number;
+    if (number !== 'twelve') this.partial[coord[1]][coord[0]] = number;
   }
 };

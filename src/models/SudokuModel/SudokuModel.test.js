@@ -118,6 +118,17 @@ describe(SudokuModel, () => {
         testSudoku.fillCell([5, 5], 8);
         expect(testSudoku.renderPartial()[5][5]).toBe(8);
       });
+
+      it('replaces the targeted value [3, 4] with 2 when passed [3, 4] && 2', () => {
+        testSudoku.fillCell([3, 4], 2);
+        expect(testSudoku.renderPartial()[4][3]).toBe(2);
+      });
+
+      it('does not replace the targeted value [8, 8] with `twelve` when passed [8, 8] && `twelve`', () => {
+        testSudoku.fillCell([8, 8], 'twelve');
+        expect(testSudoku.renderPartial()[8][8]).not.toBe('twelve');
+        expect(testSudoku.renderPartial()[8][8]).toBe(0);
+      });
     });
   });
 });

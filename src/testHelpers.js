@@ -24,12 +24,3 @@ export const generateGrid = (coordArray) => {
 
   return grid;
 }
-
-// const setState = jest.fn();
-// const useStateSpy = jest.spyOn(React, 'useState')
-// useStateSpy.mockImplementation((init) => [init, setState]);
-
-
-// afterEach(() => {
-//   jest.clearAllMocks();
-// });

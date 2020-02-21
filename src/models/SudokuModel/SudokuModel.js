@@ -76,4 +76,8 @@ export default class SudokuModel {
   renderPartial = () => {
     return this.partial;
   }
+
+  fillCell = (coord, number) => {
+    this.partial[coord[1]][coord[0]] = number;
+  }
 };

@@ -97,4 +97,27 @@ describe(SudokuModel, () => {
       expect(clues).toHaveLength(36)
     });
   });
+
+  describe('entering a guess', () => {
+    let emptyGrid = [];
+
+    for (let y = 0; y < 9; y++) {
+      let row = [];
+      for (let x = 0; x < 9; x++) {
+        row = [...row, 0];
+      }
+      emptyGrid = [...emptyGrid, row];
+    }
+
+    beforeEach(() => {
+      testSudoku = new SudokuModel(undefined, emptyGrid);
+    })
+
+    describe('fillCell()', () => {
+      it('replaces the targeted value [5, 5] with 8 when passed [5, 5] && 8', () => {
+        testSudoku.fillCell([5, 5], 8);
+        expect(testSudoku.renderPartial()[5][5]).toBe(8);
+      });
+    });
+  });
 });

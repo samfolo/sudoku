@@ -17,12 +17,23 @@ const Cell = props => {
     }
   }
 
+  const getValue = () => {
+    let value;
+    if (props.placeholders?.length === 0) {
+      value = props.value !== 0 ? props.value : null;
+    } else {
+      value = 6;
+    }
+
+    return value;
+  }
+
 
   const color = isEditable ? 'blue' : 'black';
   const value = props.value !== 0 ? props.value : null;
   return (
     <div className={Classes.Cell} data-test="component-cell" onClick={handleClick}>
-      <span className={Classes.InnerText} style={{ color }}>{value}</span>
+      <span className={Classes.InnerText} style={{ color }}>{getValue()}</span>
     </div>
   );
 }

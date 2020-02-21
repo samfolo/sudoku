@@ -1,6 +1,6 @@
 ```
-Completed game
 Errors
+Pencil
 `<Buttons>`
   Show solution (are you sure?)
   Hints?

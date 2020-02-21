@@ -135,5 +135,20 @@ describe(SudokuModel, () => {
         expect(testSudoku.renderPartial()[7][4]).toBe(0);
       });
     });
+
+    describe('clearCell()', () => {
+      it('replaces the targeted value [5, 5] with 0 when passed [5, 5] && 8', (done) => {
+        setTimeout(() => {
+          testSudoku = new SudokuModel(undefined, emptyGrid);
+          testSudoku.fillCell([5, 5], 8);
+          done();
+        });
+
+        expect(testSudoku.renderPartial()[5][5]).toBe(8);
+        
+        testSudoku.clearCell([5, 5]);
+        expect(testSudoku.renderPartial()[5][5]).toBe(0);
+      });
+    });
   });
 });

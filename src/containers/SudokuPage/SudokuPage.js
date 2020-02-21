@@ -9,7 +9,11 @@ const SudokuPage = props => {
   const [, setLastClicked] = useState(null);
   
   const handleNumberSelection = number => {
-    setSelectedNumber(number);
+    if (selectedNumber === number) {
+      setSelectedNumber(0);
+    } else {
+      setSelectedNumber(number);
+    }
   }
 
   const handleCellFilling = coord => {

@@ -40,9 +40,7 @@ export default class SudokuModel {
     return shuffledElements;
   }
 
-  renderSolution = () => {
-    return this.grid;
-  }
+  renderSolution = () => this.grid;
 
   generatePartial = difficulty => {
     let numberOfClues;
@@ -73,12 +71,16 @@ export default class SudokuModel {
     this.partial = partialGrid;
   }
 
-  renderPartial = () => {
-    return this.partial;
-  }
+  renderPartial = () => this.partial;
 
   fillCell = (coord, number) => {
     const validNumbers = [...Array(9).keys()].map(el => el + 1);
-    if (validNumbers.includes(number)) this.partial[coord[1]][coord[0]] = number;
+    if (this.partial[coord[1]][coord[0]] === number) { 
+      this.clearCell(coord);
+    } else if (validNumbers.includes(number)) { 
+      this.partial[coord[1]][coord[0]] = number;
+    }
   }
+
+  clearCell = coord => this.partial[coord[1]][coord[0]] = 0;
 };

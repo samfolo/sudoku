@@ -5,12 +5,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.Cell:hover {
+  background-color: aliceblue;
 }
 
 .InnerText {
   text-align: center;
   font-size: 2em;
   flex: 1;
+  cursor: pointer;
 }
 
 .Cell:nth-child(3n) {

@@ -11,8 +11,12 @@ const App = () => {
   const [model, setModel] = useState(sudokuModel);
 
   const handleCellFilling = (coord, value) => {
-    model.fillCell(coord, value);
-    setModel(sudokuModel);
+    if (value !== 0) {
+      model.fillCell(coord, value);
+      setModel(sudokuModel);
+    } else {
+      model.clearCell(coord);
+    }
   }
 
   return (

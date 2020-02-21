@@ -4,9 +4,10 @@ import { setup, findByTestAttr } from '../../testHelpers';
 describe('<Sudoku />', () => {
   let wrapper;
   let sudokuComponent;
+  let modelDouble = { renderPartial: () => { return [...Array(9).keys()] } };
 
   beforeEach(() => {
-    wrapper = setup(Sudoku);
+    wrapper = setup(Sudoku, { model: modelDouble });
     sudokuComponent = findByTestAttr(wrapper, 'component-sudoku');
   });
 

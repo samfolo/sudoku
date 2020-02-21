@@ -18,5 +18,10 @@ describe('<SudokuPage />', () => {
     const sudoku = findByTestAttr(wrapper, 'sudoku');
     expect(sudoku).toHaveLength(1);
   });
+
+  it('renders a number selector', () => {
+    const numberSelector = findByTestAttr(wrapper, 'number-selector');
+    expect(numberSelector).toHaveLength(1);
+  });
 });
 

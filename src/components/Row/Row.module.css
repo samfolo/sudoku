@@ -1,0 +1,16 @@
+.Row {
+  display: flex;
+  width: 100%;
+}
+
+.Row:nth-child(3n) {
+  border-bottom: 2px solid rgb(102, 33, 33);
+}
+
+.Row:first-child {
+  border-top: 2px solid rgb(102, 33, 33);
+}
+
+.Cell:nth-child(1) {
+  border-top: 2px solid rgb(102, 33, 33);
+}

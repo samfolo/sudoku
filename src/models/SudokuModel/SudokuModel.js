@@ -1,4 +1,4 @@
-export default class Sudoku {
+export default class SudokuModel {
   constructor(grid = [], partial = []) {
     this.grid = grid;
     this.partial = partial;
@@ -46,7 +46,6 @@ export default class Sudoku {
 
   generatePartial = difficulty => {
     let numberOfClues;
-
     switch (difficulty) {
       case 'easy': numberOfClues = 36; break;
       default: return null;
@@ -54,7 +53,6 @@ export default class Sudoku {
 
     // generating random coordinates, used to place clues:
     let clueCoordinates = [];
-
     while (clueCoordinates.length < numberOfClues) {
       const newCoord = [Math.floor(Math.random() * 9), Math.floor(Math.random() * 9)]
       if (!JSON.stringify(clueCoordinates).includes(JSON.stringify(newCoord))) {
@@ -64,7 +62,6 @@ export default class Sudoku {
     
     // zero-padded 9 x 9 grid:
     let partialGrid = [];
-
     for (let y = 0; y < 9; y++) {
       let newRow = [];
       for (let x = 0; x < 9; x++) newRow = [...newRow, 0];

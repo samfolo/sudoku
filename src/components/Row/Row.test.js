@@ -6,7 +6,7 @@ describe('<Row />', () => {
   let rowComponent;
 
   beforeEach(() => {
-    wrapper = setup(Row);
+    wrapper = setup(Row, { values: [...Array(9).keys()] });
     rowComponent = findByTestAttr(wrapper, 'component-row');
   });
 

@@ -13,4 +13,9 @@ describe('<Cell />', () => {
   it('renders without error', () => {
     expect(cellComponent).toHaveLength(1);
   });
+
+  it('displays its value', () => {
+    wrapper = setup(Cell, { value: 9 });
+    expect(wrapper.text()).toBe('9');
+  })
 });

@@ -129,6 +129,12 @@ describe(SudokuModel, () => {
         expect(testSudoku.renderPartial()[8][8]).not.toBe('twelve');
         expect(testSudoku.renderPartial()[8][8]).toBe(0);
       });
+
+      it('does not replace the targeted value [6, 1] with 13 when passed [6, 1] && 13', () => {
+        testSudoku.fillCell([6, 1], 13);
+        expect(testSudoku.renderPartial()[1][6]).not.toBe(13);
+        expect(testSudoku.renderPartial()[1][6]).toBe(0);
+      });
     });
   });
 });

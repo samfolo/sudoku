@@ -78,6 +78,6 @@ export default class SudokuModel {
   }
 
   fillCell = (coord, number) => {
-    if (number !== 'twelve') this.partial[coord[1]][coord[0]] = number;
+    if (number !== 'twelve' && number !== 13) this.partial[coord[1]][coord[0]] = number;
   }
 };

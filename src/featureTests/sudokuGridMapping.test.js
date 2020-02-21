@@ -3,43 +3,50 @@ import { mount } from 'enzyme';
 
 import SudokuPage from '../containers/SudokuPage/SudokuPage';
 import SudokuModel from '../models/SudokuModel/SudokuModel';
-import { generateGrid, findByTestAttr } from '../testHelpers';
+import { generateGrid } from '../testHelpers';
 
-// jest.mock('../models/SudokuModel/SudokuModel');
-
-describe('mapping', () => {
+describe('interacting with the grid', () => {
   let wrapper;
+  let testGrid;
+  let mockClick;
+  let testCell;
 
-  // const setState = jest.fn();
-  // const useStateSpy = jest.spyOn(React, 'useState')
-  // useStateSpy.mockImplementation((init) => [init, setState]);
-
+  const fillCellAt = (coord, value) => testGrid.fillCell(coord, value);
+  
   beforeEach(() => {
-    wrapper = mount(<SudokuPage />);
+    mockClick = jest.fn();
+    testGrid = new SudokuModel(undefined, generateGrid([]));
+    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} />);
   });
 
-  // afterEach(() => {
-  //   jest.clearAllMocks();
-  // });
+  // check this
+  test('a user places the number 5 at the center of a grid', () => {
+    const selectFive = wrapper.find({ id: '5_numberButton'});
+    testCell = wrapper.find({ id: '44_cell'});
+    mockClick = fillCellAt(testCell.prop('coord'), selectFive.prop('value'));
+    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} />);
 
-  test('a Sudoku grid can render with a number at [0, 0]', () => {
-    // SudokuModel.mockImplementationOnce(() => {
-    //   return {
-    //     renderPartial: () => {
-    //       return ;
-    //     },
-    //     generateGrid: jest.fn(),
-    //   };
-    // });
-    // let spy = jest.spyOn(SudokuModel.prototype, 'generate').mockImplementation(() => generateGrid([[0, 0]]));
+    testCell = wrapper.find({ id: '44_cell'});
+    expect(testCell.prop('value')).toBe(5);
+  });
 
-    // SudokuModel.prototype.partial = jest.fn().mockReturnValue(() => generateGrid([[0, 0]]));
-    // let testSudokuModel = new SudokuModel();
-    // console.log(testSudokuModel.partial);
+  test('a user places the number 7 at [6, 5]', () => {
+    const selectSeven = wrapper.find({ id: '7_numberButton'});
+    testCell = wrapper.find({ id: '65_cell'});
+    mockClick = fillCellAt(testCell.prop('coord'), selectSeven.prop('value'));
+    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} />);
 
-    // const targetCell = wrapper.find({ id: '00_cell' });
-    // expect(targetCell.prop('value')).toBe(1);
+    testCell = wrapper.find({ id: '65_cell'});
+    expect(testCell.prop('value')).toBe(7);
+  });
 
-    // spy.mockRestore();
+  test('a user places the number 1 at [1, 8]', () => {
+    const selectOne = wrapper.find({ id: '1_numberButton'});
+    testCell = wrapper.find({ id: '18_cell'});
+    mockClick = fillCellAt(testCell.prop('coord'), selectOne.prop('value'));
+    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} />);
+
+    testCell = wrapper.find({ id: '18_cell'});
+    expect(testCell.prop('value')).toBe(1);
   });
 })

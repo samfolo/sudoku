@@ -1,12 +1,15 @@
 import SudokuPage from './SudokuPage';
 import { setup, findByTestAttr } from '../../testHelpers';
+import SudokuModel from '../../models/SudokuModel/SudokuModel';
 
 describe('<SudokuPage />', () => {
   let wrapper;
   let sudokuPageComponent;
+  let testSudoku;
 
   beforeEach(() => {
-    wrapper = setup(SudokuPage);
+    testSudoku = new SudokuModel();
+    wrapper = setup(SudokuPage, { model: testSudoku });
     sudokuPageComponent = findByTestAttr(wrapper, 'component-sudoku-page');
   });
 

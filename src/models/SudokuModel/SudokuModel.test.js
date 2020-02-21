@@ -1,4 +1,5 @@
 import SudokuModel from './SudokuModel';
+import { generateGrid } from '../../testHelpers';
 
 describe(SudokuModel, () => {
   let testSudoku;
@@ -99,15 +100,7 @@ describe(SudokuModel, () => {
   });
 
   describe('entering a guess', () => {
-    let emptyGrid = [];
-
-    for (let y = 0; y < 9; y++) {
-      let row = [];
-      for (let x = 0; x < 9; x++) {
-        row = [...row, 0];
-      }
-      emptyGrid = [...emptyGrid, row];
-    }
+    let emptyGrid = generateGrid([]);
 
     beforeEach(() => {
       testSudoku = new SudokuModel(undefined, emptyGrid);

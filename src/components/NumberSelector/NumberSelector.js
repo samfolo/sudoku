@@ -8,7 +8,9 @@ const NumberSelector = props => {
     const numbers = [...Array(9).keys()].map((_, i) => {
       return <NumberButton
         key={`${i}_numberButton`}
+        id={`${i + 1}_numberButton`}
         value={i + 1}
+        onClick={() => { props.onClick(i + 1) }}
         data-test="number" />
     });
 

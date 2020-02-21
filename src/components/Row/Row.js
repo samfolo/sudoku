@@ -11,6 +11,8 @@ const Row = props => {
           key={`${index}${props.yCoord}_cell`}
           id={`${index}${props.yCoord}_cell`}
           value={cell}
+          onClick={props.onClick}
+          coord={[index, props.yCoord]}
           data-test="cell" />
       )
     });

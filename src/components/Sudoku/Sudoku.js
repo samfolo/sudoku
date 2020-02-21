@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Classes from './Sudoku.module.css';
-
-import SudokuModel from '../../models/SudokuModel/SudokuModel';
 import Row from '../Row/Row';
 
 const Sudoku = props => {
+  const handleClick = coord => {
+    props.onClick(coord);
+  }
+
   const renderRows = () => {
     const values = props.model.renderPartial();
     const rows = values.map((row, index) => {
@@ -14,6 +16,7 @@ const Sudoku = props => {
           id={`${index}_row`}
           yCoord={index}
           values={row}
+          onClick={handleClick}
           data-test="row" />
       )
     });

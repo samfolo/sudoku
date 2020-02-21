@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import Classes from './SudokuPage.module.css';
 
 import Sudoku from '../../components/Sudoku/Sudoku';
-import SudokuModel from '../../models/SudokuModel/SudokuModel';
 import NumberSelector from '../../components/NumberSelector/NumberSelector';
 
-
 const SudokuPage = props => {
-  const sudokuModel = new SudokuModel();
-  const [model, setModel] = useState(new SudokuModel);
+  const [selectedNumber, setSelectedNumber] = useState(0);
+  const [, setLastClicked] = useState(null);
+  
+  const handleNumberSelection = number => {
+    setSelectedNumber(number);
+  }
 
-  model.generateGrid();
-  model.generatePartial('easy');
+  const handleCellFilling = coord => {
+    props.onFill(coord, selectedNumber);
+    setLastClicked(coord);
+  }
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
-      <Sudoku model={model} data-test="sudoku" />
-      <NumberSelector data-test="number-selector" />
+      <Sudoku data-test="sudoku" model={props.model} onClick={handleCellFilling} />
+      <NumberSelector data-test="number-selector" onClick={handleNumberSelection} />
     </div>
   );
 }

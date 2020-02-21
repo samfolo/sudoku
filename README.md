@@ -1,3 +1,15 @@
+```
+Different colours for editable squares
+Remove inputs
+Completed game
+Errors
+`<Buttons>`
+  Show solution (are you sure?)
+  Hints?
+`</Buttons>`
+Animation/Styling
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

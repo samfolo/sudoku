@@ -25,7 +25,7 @@ describe('pre-filled square', () => {
     expect(filledCell.prop('value')).toBe(filledCellValue);
   });
   
-  it('prevents a user from changing its value', () => {
+  test('a user can still change the value of self-filled squares', () => {
     // find the first empty cell and keep track of its location
     let emptyCell = wrapper.find({ value: 0 }).first();
     let emptyCellCoord = emptyCell.prop('coord');

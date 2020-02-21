@@ -8,6 +8,7 @@ import Button from '../../components/UI/Button/Button';
 const SudokuPage = props => {
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [, setLastClicked] = useState(null);
+  const [isSolved, setIsSolved] = useState(false);
   
   const handleNumberSelection = number => {
     if (selectedNumber === number) {
@@ -22,17 +23,25 @@ const SudokuPage = props => {
     setLastClicked(coord);
   }
 
+  const handleSolve = () => {
+    props.showSolution();
+    setIsSolved(true);
+  }
+
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       <Sudoku 
         data-test="sudoku" 
         model={props.model}
+        isSolved={isSolved}
         onClick={handleCellFilling} />
+
       <NumberSelector 
         data-test="number-selector"
         selectedNumber={selectedNumber}
         onClick={handleNumberSelection} />
-      <Button data-test="show-solution" />
+
+      <Button data-test="show-solution" text={'Show Solution'} onClick={handleSolve} />
     </div>
   );
 }

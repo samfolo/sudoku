@@ -16,6 +16,7 @@ const Sudoku = props => {
           id={`${index}_row`}
           yCoord={index}
           values={row}
+          isSolved={props.isSolved}
           onClick={handleClick}
           data-test="row" />
       )

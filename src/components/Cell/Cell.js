@@ -7,13 +7,14 @@ const Cell = props => {
   
   useEffect(() => {
     if (props.value !== 0) setIsFilled(true);
-  });
+    if (props.isSolved) setIsEditable(false);
+  }, [props.isSolved]);
 
   const handleClick = () => {
-    if (!isFilled || isEditable) {
+    if (!props.isSolved && (!isFilled || isEditable)) {
       props.onClick(props.coord);
       setIsEditable(true);
-    }  
+    }
   }
 
 

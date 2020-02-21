@@ -1,6 +1,4 @@
 ```
-Different colours for editable squares
-Remove inputs
 Completed game
 Errors
 `<Buttons>`

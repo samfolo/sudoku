@@ -11,17 +11,18 @@ const App = () => {
   const [model, setModel] = useState(sudokuModel);
 
   const handleCellFilling = (coord, value) => {
-    if (value !== 0) {
-      model.fillCell(coord, value);
-      setModel(sudokuModel);
-    } else {
-      model.clearCell(coord);
-    }
+    value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
+    setModel(sudokuModel);
   }
+
+  const handleSolve = () => {
+    model.fillPartial();
+    setModel(sudokuModel);
+  };
 
   return (
     <div data-test="component-app" className={Classes.App}>
-      <SudokuPage model={model} onFill={handleCellFilling} />
+      <SudokuPage model={model} onFill={handleCellFilling} showSolution={handleSolve} />
     </div>
   );
 }

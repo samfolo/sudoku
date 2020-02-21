@@ -13,6 +13,7 @@ const Row = props => {
           value={cell}
           onClick={props.onClick}
           coord={[index, props.yCoord]}
+          isSolved={props.isSolved}
           data-test="cell" />
       )
     });

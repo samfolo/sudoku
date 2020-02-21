@@ -11,6 +11,7 @@ const NumberSelector = props => {
         id={`${i + 1}_numberButton`}
         value={i + 1}
         onClick={() => { props.onClick(i + 1) }}
+        active={props.selectedNumber === i + 1}
         data-test="number" />
     });
 

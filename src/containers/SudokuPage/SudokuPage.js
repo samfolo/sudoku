@@ -23,8 +23,14 @@ const SudokuPage = props => {
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
-      <Sudoku data-test="sudoku" model={props.model} onClick={handleCellFilling} />
-      <NumberSelector data-test="number-selector" onClick={handleNumberSelection} />
+      <Sudoku 
+        data-test="sudoku" 
+        model={props.model}
+        onClick={handleCellFilling} />
+      <NumberSelector 
+        data-test="number-selector"
+        selectedNumber={selectedNumber}
+        onClick={handleNumberSelection} />
     </div>
   );
 }

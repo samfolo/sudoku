@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import Classes from './NumberButton.module.css';
 
 const NumberButton = props => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const toggleIsClicked = () => {
-    props.onClick();
-    setIsClicked(!isClicked);
-  }
+  const backgroundColor = props.active ? 'aliceblue' : 'transparent';
 
   return (
-    <div onClick={toggleIsClicked} className={Classes.NumberButton} data-test="component-number-button">
-      <span className={Classes.Number}>{props.value}</span>
+    <div 
+      onClick={props.onClick} 
+      className={Classes.NumberButton} 
+      style={{ backgroundColor }} 
+      data-test="component-number-button">
+        <span className={Classes.Number}>{props.value}</span>
     </div>
   )
 }

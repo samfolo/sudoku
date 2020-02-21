@@ -3,6 +3,7 @@ import Classes from './SudokuPage.module.css';
 
 import Sudoku from '../../components/Sudoku/Sudoku';
 import NumberSelector from '../../components/NumberSelector/NumberSelector';
+import Button from '../../components/UI/Button/Button';
 
 const SudokuPage = props => {
   const [selectedNumber, setSelectedNumber] = useState(0);
@@ -31,6 +32,7 @@ const SudokuPage = props => {
         data-test="number-selector"
         selectedNumber={selectedNumber}
         onClick={handleNumberSelection} />
+      <Button data-test="show-solution" />
     </div>
   );
 }

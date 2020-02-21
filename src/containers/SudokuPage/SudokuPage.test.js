@@ -26,5 +26,10 @@ describe('<SudokuPage />', () => {
     const numberSelector = findByTestAttr(wrapper, 'number-selector');
     expect(numberSelector).toHaveLength(1);
   });
+
+  it('renders a show solution button', () => {
+    const showSolution = findByTestAttr(wrapper, 'show-solution');
+    expect(showSolution).toHaveLength(1);
+  });
 });
 

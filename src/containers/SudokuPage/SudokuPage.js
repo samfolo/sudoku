@@ -3,6 +3,7 @@ import Classes from './SudokuPage.module.css';
 
 import Sudoku from '../../components/Sudoku/Sudoku';
 import SudokuModel from '../../models/SudokuModel/SudokuModel';
+import NumberSelector from '../../components/NumberSelector/NumberSelector';
 
 
 const SudokuPage = props => {
@@ -15,7 +16,7 @@ const SudokuPage = props => {
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       <Sudoku model={model} data-test="sudoku" />
-      <div data-test="number-selector" />
+      <NumberSelector data-test="number-selector" />
     </div>
   );
 }

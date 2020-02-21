@@ -3,8 +3,8 @@ import Classes from './NumberButton.module.css';
 
 const NumberButton = props => {
   return (
-    <div data-test="component-number-button">
-      {props.value}
+    <div className={Classes.NumberButton} data-test="component-number-button">
+      <span className={Classes.Number}>{props.value}</span>
     </div>
   )
 }

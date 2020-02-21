@@ -17,7 +17,7 @@ const NumberSelector = props => {
 
   return (
     <div data-test="component-number-selector" className={Classes.NumberSelector}>
-      {renderButtons()}
+      <span className={Classes.NumberSelectorButtons}>{renderButtons()}</span>
     </div>
   )
 }

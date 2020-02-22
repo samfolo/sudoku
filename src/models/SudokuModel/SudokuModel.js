@@ -67,6 +67,8 @@ export default class SudokuModel {
     switch (difficulty) {
       case 'Easy': numberOfClues = 36; break;
       case 'Medium': numberOfClues = 27; break;
+      case 'Hard': numberOfClues = 21; break;
+      case 'Expert': numberOfClues = 17; break;
       default: return null;
     }
     // generating random coordinates, used to place clues:

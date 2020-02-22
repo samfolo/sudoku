@@ -90,20 +90,29 @@ describe(SudokuModel, () => {
   });
 
   describe('grids with clues', () => {
+    const allClues = () => {
+      const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
+      return allValues.filter(el => el !== 0);
+    }
+
     it('can render a version of the grid with only 36 clues', () => {
       testSudoku.generatePartial('Easy');
-      const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
-      const clues = allValues.filter(el => el !== 0);
-
-      expect(clues).toHaveLength(36)
+      expect(allClues()).toHaveLength(36);
     });
 
     it('can render a version of the grid with only 27 clues', () => {
       testSudoku.generatePartial('Medium');
-      const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
-      const clues = allValues.filter(el => el !== 0);
+      expect(allClues()).toHaveLength(27);
+    });
 
-      expect(clues).toHaveLength(27)
+    it('can render a version of the grid with only 21 clues', () => {
+      testSudoku.generatePartial('Hard');
+      expect(allClues()).toHaveLength(21);
+    });
+
+    it('can render a version of the grid with only 17 clues', () => {
+      testSudoku.generatePartial('Expert');
+      expect(allClues()).toHaveLength(17);
     });
   });
 

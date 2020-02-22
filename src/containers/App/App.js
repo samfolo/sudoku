@@ -43,7 +43,6 @@ const App = () => {
         )} />
         <Redirect to='/' />
       </Switch>
-      
     </div>
   );
 }

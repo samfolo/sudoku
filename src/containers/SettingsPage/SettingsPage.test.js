@@ -13,4 +13,9 @@ describe('<SettingsPage />', () => {
   it('renders without error', () => {
     expect(settingsPageComponent).toHaveLength(1);
   });
+
+  it('renders a difficulty picker', () => {
+    const difficultyPicker = findByTestAttr(wrapper, 'difficulty-picker');
+    expect(difficultyPicker).toHaveLength(1);
+  });
 });

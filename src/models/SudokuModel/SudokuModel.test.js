@@ -91,11 +91,19 @@ describe(SudokuModel, () => {
 
   describe('grids with clues', () => {
     it('can render a version of the grid with only 36 clues', () => {
-      testSudoku.generatePartial('easy');
+      testSudoku.generatePartial('Easy');
       const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
       const clues = allValues.filter(el => el !== 0);
 
       expect(clues).toHaveLength(36)
+    });
+
+    it('can render a version of the grid with only 27 clues', () => {
+      testSudoku.generatePartial('Medium');
+      const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
+      const clues = allValues.filter(el => el !== 0);
+
+      expect(clues).toHaveLength(27)
     });
   });
 

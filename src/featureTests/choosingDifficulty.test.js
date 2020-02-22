@@ -11,6 +11,14 @@ describe('choosing a difficulty', () => {
   let mediumButton; 
   let hardButton;
   let expertButton;
+  let filledCells;
+
+  const findAllButtons = () => {
+    easyButton = findByTestAttr(wrapper, 'Easy-button');
+    mediumButton = findByTestAttr(wrapper, 'Medium-button');
+    hardButton = findByTestAttr(wrapper, 'Hard-button');
+    expertButton = findByTestAttr(wrapper, 'Expert-button');
+  }
 
   beforeEach(() => {
     wrapper = mount(
@@ -18,10 +26,7 @@ describe('choosing a difficulty', () => {
         <App />
       </MemoryRouter> 
     );
-    easyButton = findByTestAttr(wrapper, 'Easy-button');
-    mediumButton = findByTestAttr(wrapper, 'Medium-button');
-    hardButton = findByTestAttr(wrapper, 'Hard-button');
-    expertButton = findByTestAttr(wrapper, 'Expert-button');
+    findAllButtons();
   });
   
   test('sudoku has a default difficulty of `Medium`', () => {
@@ -35,16 +40,22 @@ describe('choosing a difficulty', () => {
   test('a user wants to adjust difficulty', () => {
     easyButton.simulate('click');
     
-    // re-find all buttons
-    easyButton = findByTestAttr(wrapper, 'Easy-button');
-    mediumButton = findByTestAttr(wrapper, 'Medium-button');
-    hardButton = findByTestAttr(wrapper, 'Hard-button');
-    expertButton = findByTestAttr(wrapper, 'Expert-button');
+    findAllButtons();
 
     expect(mediumButton.prop('active')).toBe(false);
     expect(hardButton.prop('active')).toBe(false);
     expect(expertButton.prop('active')).toBe(false);
 
     expect(easyButton.prop('active')).toBe(true);
+  });
+
+  test('a user selects a difficulty then presses play', () => {
+    mediumButton.simulate('click');
+
+    const playButton = findByTestAttr(wrapper, 'play-button');
+    playButton.simulate('click');
+
+    filledCells = wrapper.findWhere((n) => n.prop('value') !== 0 && n.name() === 'Cell');
+    expect(filledCells).toHaveLength(27);
   });
 });

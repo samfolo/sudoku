@@ -7,7 +7,7 @@ export default class SudokuModel {
   generateGrid = () => {
     let grid = [];
     let preshuffledNumbers = [...Array(9).keys()].map(el => el + 1);
-    
+
     // shuffle first row:
     let numbers = this.shuffle(preshuffledNumbers, 9);
 
@@ -65,10 +65,10 @@ export default class SudokuModel {
   generatePartial = difficulty => {
     let numberOfClues;
     switch (difficulty) {
-      case 'easy': numberOfClues = 36; break;
+      case 'Easy': numberOfClues = 36; break;
+      case 'Medium': numberOfClues = 27; break;
       default: return null;
     }
-
     // generating random coordinates, used to place clues:
     let clueCoordinates = [];
     while (clueCoordinates.length < numberOfClues) {

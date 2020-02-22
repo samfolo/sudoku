@@ -8,10 +8,11 @@ import SettingsPage from '../SettingsPage/SettingsPage';
 
 const sudokuModel = new SudokuModel();
 sudokuModel.generateGrid();
-sudokuModel.generatePartial('easy');
+sudokuModel.generatePartial('Easy');
 
 const App = () => {
   const [model, setModel] = useState(sudokuModel);
+  const [inGame, setInGame] = useState(false);
 
   const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
@@ -28,11 +29,21 @@ const App = () => {
     setModel(sudokuModel);
   }
 
+  const handleSetup = difficulty => {
+    sudokuModel.generateGrid();
+    sudokuModel.generatePartial(difficulty);
+    setModel(sudokuModel);
+    setInGame(true);
+  }
+
   return (
     <div data-test="component-app" className={Classes.App}>
       <Switch>
         <Route path="/" exact render={() => (
-          <SettingsPage />
+          <SettingsPage
+            inGame={inGame}
+            playGame={handleSetup}
+          />
         )} />
         <Route path="/play" render={() => (
           <SudokuPage 

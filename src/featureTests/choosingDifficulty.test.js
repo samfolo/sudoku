@@ -49,13 +49,22 @@ describe('choosing a difficulty', () => {
     expect(easyButton.prop('active')).toBe(true);
   });
 
-  test('a user selects a difficulty then presses play', () => {
-    mediumButton.simulate('click');
+  describe('selecting difficulty', () => {
+    const runTestWith = (button, expected) => {
+      const playButton = findByTestAttr(wrapper, 'play-button');
+  
+      button.simulate('click');
+      playButton.simulate('click');
+      
+      filledCells = wrapper.findWhere((n) => n.prop('value') !== 0 && n.name() === 'Cell');
 
-    const playButton = findByTestAttr(wrapper, 'play-button');
-    playButton.simulate('click');
+      expect(filledCells).toHaveLength(expected);
+    }
 
-    filledCells = wrapper.findWhere((n) => n.prop('value') !== 0 && n.name() === 'Cell');
-    expect(filledCells).toHaveLength(27);
+    test('a user selects a `Easy` difficulty then presses play', () => runTestWith(easyButton, 36));
+    test('a user selects a `Medium` difficulty then presses play', () => runTestWith(mediumButton, 27));
+    test('a user selects a `Hard` difficulty then presses play', () => runTestWith(hardButton, 21));
+    test('a user selects an `Expert` difficulty then presses play', () => runTestWith(expertButton, 17));
   });
+  
 });

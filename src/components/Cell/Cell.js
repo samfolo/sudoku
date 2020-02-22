@@ -37,7 +37,6 @@ const Cell = props => {
       setTemporaryFillers([]);
       setIsEditable(true);
     }
-    console.log(props.value)
   }
 
   const renderTemporaryFillers = () => {

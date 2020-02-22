@@ -1,10 +1,14 @@
 ```
-Errors
+When completed: () => {}
+  "Show Errors or Restart?"
+
 `<Buttons>`
   Show solution (are you sure?)
   Hints?
 `</Buttons>`
 Animation/Styling
+
+Timing
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

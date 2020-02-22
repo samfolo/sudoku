@@ -54,8 +54,19 @@ const SudokuPage = props => {
         selectedNumber={selectedNumber}
         onClick={handleNumberSelection} />
 
-      <Button data-test="show-solution" text={'Show Solution'} onClick={handleSolve} />
-      <Button data-test="temporary-fill" text={'Temporary Fill'} onClick={toggleTemporaryFill} />
+      <div className={Classes.Buttons}>
+        <Button 
+          data-test="show-solution"
+          text={'Show Solution'}
+          onClick={handleSolve} />
+        <Button 
+          data-test="temporary-fill"
+          width={'1em'}
+          height={'1em'}
+          backgroundClass={'TemporaryFill'}
+          backgroundColor={isTemporaryFill ? 'aliceblue' : null}
+          onClick={toggleTemporaryFill} />
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ const SudokuPage = props => {
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [, setLastClicked] = useState(null);
   const [isSolved, setIsSolved] = useState(false);
+  const [isTemporaryFill, setIsTemporaryFill] = useState(false);
   
   const handleNumberSelection = number => {
     if (selectedNumber === number) {
@@ -28,12 +29,16 @@ const SudokuPage = props => {
     setIsSolved(true);
   }
 
+  const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
+
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       <Sudoku 
         data-test="sudoku" 
         model={props.model}
         isSolved={isSolved}
+        selectedNumber={selectedNumber}
+        isTemporaryFill={isTemporaryFill}
         onClick={handleCellFilling} />
 
       <NumberSelector 
@@ -42,6 +47,7 @@ const SudokuPage = props => {
         onClick={handleNumberSelection} />
 
       <Button data-test="show-solution" text={'Show Solution'} onClick={handleSolve} />
+      <Button data-test="temporary-fill" text={'Temporary Fill'} onClick={toggleTemporaryFill} />
     </div>
   );
 }

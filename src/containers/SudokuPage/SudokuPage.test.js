@@ -31,5 +31,10 @@ describe('<SudokuPage />', () => {
     const showSolution = findByTestAttr(wrapper, 'show-solution');
     expect(showSolution).toHaveLength(1);
   });
+
+  it('renders a `temporary fill` button', () => {
+    const temporaryFill = findByTestAttr(wrapper, 'temporary-fill');
+    expect(temporaryFill).toHaveLength(1);
+  });
 });
 

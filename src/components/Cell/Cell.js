@@ -13,29 +13,57 @@ const Cell = props => {
     if (props.isSolved) setIsEditable(false);
   }, [props.isSolved]);
 
+  const handleTemporaryFill = number => {
+    if (temporaryFillers.includes(number)) {
+      const index = temporaryFillers.indexOf(number);
+      setTemporaryFillers([...temporaryFillers.slice(0, index), ...temporaryFillers.slice(index + 1)])
+    } else {
+      setTemporaryFillers([...temporaryFillers, number])
+    }
+  }
+
   const handleClick = () => {
-    if (props.isTemporaryFiller) {
-      setTemporaryFillers([...temporaryFillers]) // 'push' new value, useContext?
-    } else if (!props.isSolved && (!isFilled || isEditable)) {
+    const validClick = !props.isSolved && (!isFilled || isEditable);
+
+    if (validClick && props.isTemporaryFill) {
+      handleTemporaryFill(props.selectedNumber);
+    } else if (validClick) {
       props.onClick(props.coord);
+      setTemporaryFillers([]);
       setIsEditable(true);
     }
   }
 
+  const renderTemporaryFillers = () => {
+    const oneToNine = [...Array(9).keys()].map(el => el + 1);
+
+    // return a zero padded list of pencilled-in numbers
+    const subCells = oneToNine.map((el, index) => {
+      return temporaryFillers.includes(el) ? 
+        <SubCell key={`${index}_subCell`} value={el} /> :
+        <SubCell key={`${index}_subCell`} value={0} />;
+    });
+
+    // return 3 x 3 grid
+    return [
+      <div className={Classes.SubRow}>{subCells.slice(0, 3)}</div>,
+      <div className={Classes.SubRow}>{subCells.slice(3, 6)}</div>,
+      <div className={Classes.SubRow}>{subCells.slice(6)}</div>,
+    ];
+  }
+  
   const getValue = () => {
     let value;
-    if (props.placeholders?.length === 0) { // turn this into feature test, `click temporary fill button`
+    if (temporaryFillers.length === 0 || props.isSolved) {
       value = props.value !== 0 ? props.value : null;
     } else {
-      value = props.placeholders[0];
+      value = renderTemporaryFillers();
     }
 
-    return props.value !== 0 ? props.value : null; // change back to `value`
+    return value;
   }
 
-
   const color = isEditable ? 'blue' : 'black';
-  // const value = props.value !== 0 ? props.value : null;
   return (
     <div className={Classes.Cell} data-test="component-cell" onClick={handleClick}>
       <span className={Classes.InnerText} style={{ color }}>{getValue()}</span>

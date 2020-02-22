@@ -6,7 +6,7 @@ describe('<Cell />', () => {
   let cellComponent;
 
   beforeEach(() => {
-    wrapper = setup(Cell);
+    wrapper = setup(Cell, { placeholders: [9] });
     cellComponent = findByTestAttr(wrapper, 'component-cell');
   });
 
@@ -15,7 +15,7 @@ describe('<Cell />', () => {
   });
 
   it('displays its value', () => {
-    wrapper = setup(Cell, { value: 9 });
+    wrapper = setup(Cell, { value: 9, placeholders: [] });
     expect(wrapper.text()).toBe('9');
   });
 });

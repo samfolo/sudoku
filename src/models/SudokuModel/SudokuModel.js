@@ -7,18 +7,38 @@ export default class SudokuModel {
   generateGrid = () => {
     let grid = [];
     let preshuffledNumbers = [...Array(9).keys()].map(el => el + 1);
+    
+    // shuffle first row:
     let numbers = this.shuffle(preshuffledNumbers, 9);
 
+    // fill grid:
     for (let i = 0; i < 9; i++) {
-      numbers = i % 3 === 0 ? [...numbers.slice(1), numbers[0]] : 
-      [...numbers.slice(3), ...numbers.slice(0, 3)];
+      numbers = i % 3 === 0 ? [...numbers.slice(4), ...numbers.slice(0, 4)] : 
+        [...numbers.slice(3), ...numbers.slice(0, 3)];
       grid = [...grid, numbers];
     }
-
+    
+    // shuffle rows per each third:
     grid = [
       ...this.shuffle(grid.slice(0, 3), 3),
       ...this.shuffle(grid.slice(3, 6), 3),
       ...this.shuffle(grid.slice(6), 3),
+    ];
+    
+    // rotate 90 degrees:
+    let columns = [[], [], [], [], [], [], [], [], []];
+    
+    grid.forEach((row) => {
+      row.forEach((el, i) => {
+        columns[i] = [...columns[i], el];
+      });
+    });
+    
+    // shuffle again:
+    grid = [
+      ...this.shuffle(columns.slice(0, 3), 3),
+      ...this.shuffle(columns.slice(3, 6), 3),
+      ...this.shuffle(columns.slice(6), 3),
     ];
     
     this.solution = grid;

@@ -1,6 +1,6 @@
 .Cell {
-  width: 5vh;
-  height: 5vh;
+  width: 6vh;
+  height: 6vh;
   border: 1px solid rgba(102, 33, 33, 0.418);
   display: flex;
   justify-content: center;
@@ -30,4 +30,8 @@
 
 .Cell:first-child {
   border-left: 2px solid rgb(102, 33, 33);
+}
+
+.SubRow {
+  display: flex;
 }

@@ -8,6 +8,8 @@ import Button from '../../components/UI/Button/Button';
 const SudokuPage = props => {
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [, setLastClicked] = useState(null);
+  const [isSolved, setIsSolved] = useState(false);
+  const [isTemporaryFill, setIsTemporaryFill] = useState(false);
   
   const handleNumberSelection = number => {
     if (selectedNumber === number) {
@@ -18,21 +20,40 @@ const SudokuPage = props => {
   }
 
   const handleCellFilling = coord => {
-    props.onFill(coord, selectedNumber);
+    props.onClick(coord, selectedNumber);
     setLastClicked(coord);
   }
+  
+  const handleSolve = () => {
+    props.showSolution();
+    setIsSolved(true);
+  }
+  
+  const handleCellClearing = coord => {
+    props.onClear(coord, selectedNumber);
+    setLastClicked(coord);
+  }
+
+  const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       <Sudoku 
         data-test="sudoku" 
         model={props.model}
+        isSolved={isSolved}
+        selectedNumber={selectedNumber}
+        isTemporaryFill={isTemporaryFill}
+        onClear={handleCellClearing}
         onClick={handleCellFilling} />
+
       <NumberSelector 
         data-test="number-selector"
         selectedNumber={selectedNumber}
         onClick={handleNumberSelection} />
-      <Button data-test="show-solution" />
+
+      <Button data-test="show-solution" text={'Show Solution'} onClick={handleSolve} />
+      <Button data-test="temporary-fill" text={'Temporary Fill'} onClick={toggleTemporaryFill} />
     </div>
   );
 }

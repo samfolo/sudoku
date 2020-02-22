@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Classes from './App.module.css';
+
 import SudokuPage from '../SudokuPage/SudokuPage';
 import SudokuModel from '../../models/SudokuModel/SudokuModel';
-import { Switch, Route } from 'react-router-dom';
+import SettingsPage from '../SettingsPage/SettingsPage';
 
 const sudokuModel = new SudokuModel();
 sudokuModel.generateGrid();
@@ -29,6 +31,9 @@ const App = () => {
   return (
     <div data-test="component-app" className={Classes.App}>
       <Switch>
+        <Route path="/" exact render={() => (
+          <SettingsPage />
+        )} />
         <Route path="/play" render={() => (
           <SudokuPage 
             model={model} 
@@ -36,6 +41,7 @@ const App = () => {
             onClear={handleCellClearing}
             showSolution={handleSolve} />
         )} />
+        <Redirect to='/' />
       </Switch>
       
     </div>

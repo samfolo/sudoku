@@ -18,18 +18,4 @@ describe('<Cell />', () => {
     wrapper = setup(Cell, { value: 9, placeholders: [] });
     expect(wrapper.text()).toBe('9');
   });
-
-  describe('placeholders', () => {
-    it('displays potential value of 6 instead of a solid value when passed `placeholders: [6]`', () => {
-      wrapper = setup(Cell, { value: 2, placeholders: [6] });
-      expect(wrapper.text()).toContain('6');
-      expect(wrapper.text()).not.toContain('2');
-    });
-
-    it('displays potential value of 8 instead of a solid value when passed `placeholders: [8]`', () => {
-      wrapper = setup(Cell, { value: 1, placeholders: [8] });
-      expect(wrapper.text()).toContain('8');
-      expect(wrapper.text()).not.toContain('1');
-    });
-  });
 });

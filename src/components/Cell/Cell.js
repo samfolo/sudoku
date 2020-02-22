@@ -14,24 +14,30 @@ const Cell = props => {
   }, [props.isSolved]);
 
   const handleTemporaryFill = number => {
+    // toggle presence of pencilled-in number:
     if (temporaryFillers.includes(number)) {
       const index = temporaryFillers.indexOf(number);
-      setTemporaryFillers([...temporaryFillers.slice(0, index), ...temporaryFillers.slice(index + 1)])
+      setTemporaryFillers([
+        ...temporaryFillers.slice(0, index), 
+        ...temporaryFillers.slice(index + 1)
+      ]);
     } else {
       setTemporaryFillers([...temporaryFillers, number])
     }
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const validClick = !props.isSolved && (!isFilled || isEditable);
-
     if (validClick && props.isTemporaryFill) {
+      props.onClear(props.coord)
       handleTemporaryFill(props.selectedNumber);
+      setIsEditable(false);
     } else if (validClick) {
       props.onClick(props.coord);
       setTemporaryFillers([]);
       setIsEditable(true);
     }
+    console.log(props.value)
   }
 
   const renderTemporaryFillers = () => {
@@ -46,9 +52,9 @@ const Cell = props => {
 
     // return 3 x 3 grid
     return [
-      <div className={Classes.SubRow}>{subCells.slice(0, 3)}</div>,
-      <div className={Classes.SubRow}>{subCells.slice(3, 6)}</div>,
-      <div className={Classes.SubRow}>{subCells.slice(6)}</div>,
+      <div key="subRow_1" className={Classes.SubRow}>{subCells.slice(0, 3)}</div>,
+      <div key="subRow_2" className={Classes.SubRow}>{subCells.slice(3, 6)}</div>,
+      <div key="subRow_3" className={Classes.SubRow}>{subCells.slice(6)}</div>,
     ];
   }
   
@@ -56,9 +62,7 @@ const Cell = props => {
     let value;
     if (temporaryFillers.length === 0 || props.isSolved) {
       value = props.value !== 0 ? props.value : null;
-    } else {
-      value = renderTemporaryFillers();
-    }
+    } else value = renderTemporaryFillers();
 
     return value;
   }

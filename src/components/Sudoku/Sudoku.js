@@ -17,6 +17,7 @@ const Sudoku = props => {
           values={row}
           yCoord={index}
           onClick={handleClick}
+          onClear={props.onClear}
           isSolved={props.isSolved}
           isTemporaryFill={props.isTemporaryFill}
           selectedNumber={props.selectedNumber}

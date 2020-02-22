@@ -10,7 +10,7 @@ sudokuModel.generatePartial('easy');
 const App = () => {
   const [model, setModel] = useState(sudokuModel);
 
-  const handleCellFilling = (coord, value) => {
+  const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
     setModel(sudokuModel);
   }
@@ -19,10 +19,19 @@ const App = () => {
     model.fillPartial();
     setModel(sudokuModel);
   };
+  
+  const handleCellClearing = coord => {
+    model.clearCell(coord);
+    setModel(sudokuModel);
+  }
 
   return (
     <div data-test="component-app" className={Classes.App}>
-      <SudokuPage model={model} onFill={handleCellFilling} showSolution={handleSolve} />
+      <SudokuPage 
+        model={model} 
+        onClick={handleCellClick}
+        onClear={handleCellClearing}
+        showSolution={handleSolve} />
     </div>
   );
 }

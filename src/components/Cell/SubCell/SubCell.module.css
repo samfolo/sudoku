@@ -1,3 +1,11 @@
 .SubCell {
+  width: 2vh;
+  height: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.InnerText {
   font-size: 10px;
 }

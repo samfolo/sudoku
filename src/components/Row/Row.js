@@ -12,6 +12,7 @@ const Row = props => {
           id={`${index}${props.yCoord}_cell`}
           value={cell}
           onClick={props.onClick}
+          onClear={props.onClear}
           coord={[index, props.yCoord]}
           isSolved={props.isSolved}
           isTemporaryFill={props.isTemporaryFill}

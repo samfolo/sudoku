@@ -20,13 +20,18 @@ const SudokuPage = props => {
   }
 
   const handleCellFilling = coord => {
-    props.onFill(coord, selectedNumber);
+    props.onClick(coord, selectedNumber);
     setLastClicked(coord);
   }
-
+  
   const handleSolve = () => {
     props.showSolution();
     setIsSolved(true);
+  }
+  
+  const handleCellClearing = coord => {
+    props.onClear(coord, selectedNumber);
+    setLastClicked(coord);
   }
 
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
@@ -39,6 +44,7 @@ const SudokuPage = props => {
         isSolved={isSolved}
         selectedNumber={selectedNumber}
         isTemporaryFill={isTemporaryFill}
+        onClear={handleCellClearing}
         onClick={handleCellFilling} />
 
       <NumberSelector 

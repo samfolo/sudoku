@@ -6,7 +6,7 @@ describe('<Cell />', () => {
   let cellComponent;
 
   beforeEach(() => {
-    wrapper = setup(Cell);
+    wrapper = setup(Cell, { placeholders: [9] });
     cellComponent = findByTestAttr(wrapper, 'component-cell');
   });
 
@@ -20,10 +20,16 @@ describe('<Cell />', () => {
   });
 
   describe('placeholders', () => {
-    it('displays potential values instead of a solid value', () => {
+    it('displays potential value of 6 instead of a solid value when passed `placeholders: [6]`', () => {
       wrapper = setup(Cell, { value: 2, placeholders: [6] });
       expect(wrapper.text()).toContain('6');
       expect(wrapper.text()).not.toContain('2');
+    });
+
+    it('displays potential value of 8 instead of a solid value when passed `placeholders: [8]`', () => {
+      wrapper = setup(Cell, { value: 1, placeholders: [8] });
+      expect(wrapper.text()).toContain('8');
+      expect(wrapper.text()).not.toContain('1');
     });
   });
 });

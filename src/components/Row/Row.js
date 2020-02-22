@@ -14,6 +14,7 @@ const Row = props => {
           onClick={props.onClick}
           coord={[index, props.yCoord]}
           isSolved={props.isSolved}
+          placeholders={[null]}
           data-test="cell" />
       )
     });

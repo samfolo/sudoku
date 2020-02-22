@@ -15,10 +15,10 @@ describe('<DifficultyPicker />', () => {
   });
 
   it('renders `easy`, `medium`, `hard` and `expert` buttons', () => {
-    const easyButton = findByTestAttr(wrapper, 'easy-button');
-    const mediumButton = findByTestAttr(wrapper, 'medium-button');
-    const hardButton = findByTestAttr(wrapper, 'hard-button');
-    const expertButton = findByTestAttr(wrapper, 'expert-button');
+    const easyButton = findByTestAttr(wrapper, 'Easy-button');
+    const mediumButton = findByTestAttr(wrapper, 'Medium-button');
+    const hardButton = findByTestAttr(wrapper, 'Hard-button');
+    const expertButton = findByTestAttr(wrapper, 'Expert-button');
 
     [easyButton, mediumButton, hardButton, expertButton].every(button => (
       expect(button).toHaveLength(1)

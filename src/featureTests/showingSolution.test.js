@@ -16,10 +16,11 @@ describe('showing solution', () => {
     );
   });
   
-  test('a user wants to see the full solution', async () => {
+  test('a user wants to see the full solution', () => {
     const showSolutionButton = findByTestAttr(wrapper, 'show-solution');
     showSolutionButton.simulate('click');
 
+    // all squares are filled with (1..9) numbers
     expect(wrapper.text().includes('0')).toBe(false);
   });
 });

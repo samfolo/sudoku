@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Classes from './DifficultyPicker.module.css';
 
 import DifficultyButton from './DifficultyButton/DifficultyButton';
 
 const DifficultyPicker = props => {
-  const [currentDifficulty, setCurrentDifficulty] = useState('Medium');
-
   const renderDifficultyButtons = () => {
     const difficulties = ['Easy', 'Medium', 'Hard', 'Expert'];
 
@@ -13,8 +11,9 @@ const DifficultyPicker = props => {
       return (
         <DifficultyButton 
           key={`${i}_difficultyButton`}
-          active={difficulty === currentDifficulty}
+          active={difficulty === props.currentDifficulty}
           data-test={`${difficulty}-button`}
+          onClick={() => { props.onChange(difficulty); }}
           value={difficulty} />
       );
     });
@@ -24,7 +23,7 @@ const DifficultyPicker = props => {
 
   return (
     <div className={Classes.DifficultyPicker} data-test="component-difficulty-picker">
-      {renderDifficultyButtons()}
+        {renderDifficultyButtons()}
     </div>
   );
 }

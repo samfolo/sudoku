@@ -28,17 +28,23 @@ describe('choosing a difficulty', () => {
     expect(easyButton.prop('active')).toBe(false);
     expect(hardButton.prop('active')).toBe(false);
     expect(expertButton.prop('active')).toBe(false);
-
+    
     expect(mediumButton.prop('active')).toBe(true);
   });
-
-  // test('a user wants to adjust difficulty', () => {
-  //   easyButton.simulate('click');
-
-  //   expect(easyButton.prop('active')).toBe(false);
-  //   expect(hardButton.prop('active')).toBe(false);
-  //   expect(expertButton.prop('active')).toBe(false);
+  
+  test('a user wants to adjust difficulty', () => {
+    easyButton.simulate('click');
     
-  //   expect(mediumButton.prop('active')).toBe(true);
-  // });
+    // re-find all buttons
+    easyButton = findByTestAttr(wrapper, 'Easy-button');
+    mediumButton = findByTestAttr(wrapper, 'Medium-button');
+    hardButton = findByTestAttr(wrapper, 'Hard-button');
+    expertButton = findByTestAttr(wrapper, 'Expert-button');
+
+    expect(mediumButton.prop('active')).toBe(false);
+    expect(hardButton.prop('active')).toBe(false);
+    expect(expertButton.prop('active')).toBe(false);
+
+    expect(easyButton.prop('active')).toBe(true);
+  });
 });

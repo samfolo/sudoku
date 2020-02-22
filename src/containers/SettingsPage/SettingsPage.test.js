@@ -18,4 +18,9 @@ describe('<SettingsPage />', () => {
     const difficultyPicker = findByTestAttr(wrapper, 'difficulty-picker');
     expect(difficultyPicker).toHaveLength(1);
   });
+
+  it('renders a play button', () => {
+    const playButton = findByTestAttr(wrapper, 'play-button');
+    expect(playButton).toHaveLength(1);
+  });
 });

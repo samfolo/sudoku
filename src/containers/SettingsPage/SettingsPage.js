@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
+
 import Classes from './SettingsPage.module.css';
 import DifficultyPicker from '../../components/DifficultyPicker/DifficultyPicker';
 import Button from '../../components/UI/Button/Button';
-import { Redirect } from 'react-router';
 
 const SettingsPage = props => {
   const [currentDifficulty, setCurrentDifficulty] = useState('Medium');

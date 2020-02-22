@@ -39,7 +39,7 @@ const SudokuPage = props => {
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
-      { props.inGame || props.test ? null : <Redirect to="/" /> }
+      { (props.inGame || props.test) ? null : <Redirect to="/" /> }
       <Sudoku 
         data-test="sudoku" 
         model={props.model}

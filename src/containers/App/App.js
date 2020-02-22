@@ -33,25 +33,41 @@ const App = () => {
     setInGame(true);
   }
 
+  let routes = (
+    <Switch>
+      <Route path="/" exact render={() => (
+        <SettingsPage
+          inGame={inGame}
+          playGame={handleSetup}
+        />
+      )} />
+      <Route path="/play" exact render={() => (
+        <SudokuPage 
+          model={model}
+          inGame={inGame}
+          onClick={handleCellClick}
+          onClear={handleCellClearing}
+          showSolution={handleSolve} />
+      )} />
+      <Redirect to='/' />
+    </Switch>
+  );
+
+  if (!model) routes = (
+    <Switch>
+      <Route path="/" exact render={() => (
+        <SettingsPage
+          inGame={inGame}
+          playGame={handleSetup}
+        />
+      )} />
+      <Redirect to='/' />
+    </Switch>
+  )
+
   return (
     <div data-test="component-app" className={Classes.App}>
-      <Switch>
-        <Route path="/" exact render={() => (
-          <SettingsPage
-            inGame={inGame}
-            playGame={handleSetup}
-          />
-        )} />
-        <Route path="/play" render={() => (
-          <SudokuPage 
-            model={model}
-            inGame={inGame}
-            onClick={handleCellClick}
-            onClear={handleCellClearing}
-            showSolution={handleSolve} />
-        )} />
-        <Redirect to='/' />
-      </Switch>
+      {routes}
     </div>
   );
 }

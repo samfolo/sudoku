@@ -1,7 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from '../containers/App/App';
 import { findByTestAttr } from '../testHelpers';
+import { MemoryRouter } from 'react-router-dom';
+
+import App from '../containers/App/App';
 
 describe('a pencilled-in square', () => {
   let wrapper;
@@ -11,7 +13,11 @@ describe('a pencilled-in square', () => {
   let selectedNumber;
 
   beforeEach(() => {
-    wrapper = mount(<App />);
+    wrapper = mount(
+      <MemoryRouter initialEntries={["/play"]}>
+        <App />
+      </MemoryRouter> 
+    );
     testCell = wrapper.find({ value: 0 }).first();
     testCellCoord = testCell.prop('coord');  
   });

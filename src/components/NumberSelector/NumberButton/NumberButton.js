@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Classes from './NumberButton.module.css';
 
 const NumberButton = props => {

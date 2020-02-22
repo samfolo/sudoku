@@ -1,5 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
+
 import App from '../containers/App/App';
 
 describe('pre-filled square', () => {
@@ -10,7 +12,11 @@ describe('pre-filled square', () => {
   let selectedNumber;
 
   beforeEach(() => {
-    wrapper = mount(<App />);
+    wrapper = mount(
+      <MemoryRouter initialEntries={["/play"]}>
+        <App />
+      </MemoryRouter> 
+    );
     filledCell = wrapper.findWhere((n) => n.prop('value') !== 0 && n.name() === 'Cell').first();
     filledCellValue = filledCell.prop('value');
     filledCellCoord = filledCell.prop('coord');

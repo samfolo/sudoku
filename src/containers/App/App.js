@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Classes from './App.module.css';
 import SudokuPage from '../SudokuPage/SudokuPage';
 import SudokuModel from '../../models/SudokuModel/SudokuModel';
+import { Switch, Route } from 'react-router-dom';
 
 const sudokuModel = new SudokuModel();
 sudokuModel.generateGrid();
@@ -27,11 +28,16 @@ const App = () => {
 
   return (
     <div data-test="component-app" className={Classes.App}>
-      <SudokuPage 
-        model={model} 
-        onClick={handleCellClick}
-        onClear={handleCellClearing}
-        showSolution={handleSolve} />
+      <Switch>
+        <Route path="/play" render={() => (
+          <SudokuPage 
+            model={model} 
+            onClick={handleCellClick}
+            onClear={handleCellClearing}
+            showSolution={handleSolve} />
+        )} />
+      </Switch>
+      
     </div>
   );
 }

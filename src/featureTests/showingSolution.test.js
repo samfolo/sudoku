@@ -1,13 +1,19 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from '../containers/App/App';
+import { MemoryRouter } from 'react-router-dom';
 import { findByTestAttr } from '../testHelpers';
+
+import App from '../containers/App/App';
 
 describe('showing solution', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<App />);
+    wrapper = mount(
+      <MemoryRouter initialEntries={["/play"]}>
+        <App />
+      </MemoryRouter> 
+    );
   });
   
   test('a user wants to see the full solution', async () => {

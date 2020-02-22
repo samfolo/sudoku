@@ -28,6 +28,7 @@ const Cell = props => {
 
   const handleClick = async () => {
     const validClick = !props.isSolved && (!isFilled || isEditable);
+    
     if (validClick && props.isTemporaryFill) {
       props.onClear(props.coord)
       handleTemporaryFill(props.selectedNumber);

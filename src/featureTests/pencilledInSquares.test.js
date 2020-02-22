@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { findByTestAttr } from '../testHelpers';
+import { findByTestAttr, beginGame } from '../testHelpers';
 import { MemoryRouter } from 'react-router-dom';
 
 import App from '../containers/App/App';
@@ -14,10 +14,11 @@ describe('a pencilled-in square', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <MemoryRouter initialEntries={["/play"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter> 
     );
+    beginGame(wrapper, 'Easy');
     testCell = wrapper.find({ value: 0 }).first();
     testCellCoord = testCell.prop('coord');  
   });

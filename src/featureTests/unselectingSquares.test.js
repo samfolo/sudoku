@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-
+import { beginGame } from '../testHelpers';
 import App from '../containers/App/App';
 
 describe('unselecting squares', () => {
@@ -10,10 +10,11 @@ describe('unselecting squares', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <MemoryRouter initialEntries={["/play"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter> 
     );
+    beginGame(wrapper, 'Easy');
     selectedNumber = wrapper.find({ id: '9_numberButton' });
   });
   

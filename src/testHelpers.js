@@ -24,3 +24,10 @@ export const generateGrid = (coordArray) => {
 
   return grid;
 }
+
+export const beginGame = (wrapper, difficulty) => {
+  const button = findByTestAttr(wrapper, `${difficulty}-button`);
+  const playButton = findByTestAttr(wrapper, 'play-button');
+  button.simulate('click');
+  playButton.simulate('click');
+}

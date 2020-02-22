@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Classes from './SudokuPage.module.css';
 
 import Sudoku from '../../components/Sudoku/Sudoku';
@@ -38,6 +39,7 @@ const SudokuPage = props => {
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
+      { props.inGame || props.test ? null : <Redirect to="/" /> }
       <Sudoku 
         data-test="sudoku" 
         model={props.model}

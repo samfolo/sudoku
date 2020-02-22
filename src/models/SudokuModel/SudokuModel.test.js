@@ -41,50 +41,39 @@ describe(SudokuModel, () => {
 
   describe('sub-grids', () => {
     test('each sub-grid contains the numbers 1-9', () => {
+      const gatherSubGrids = (subGrids, third, coordA, coordB, coordC) => {
+        third.forEach(row => {
+          row.forEach((el, i) => {
+            switch (true) {
+              case (i < 3) : subGrids[coordA] = [...subGrids[coordA], el]; break;
+              case (i < 6) : subGrids[coordB] = [...subGrids[coordB], el]; break;
+              default : subGrids[coordC] = [...subGrids[coordC], el]; break;
+            }
+          });
+        });
+      };
+
       let subGrids = [[], [], [], [], [], [], [], [], []];
 
       let firstThird = testSudoku.renderSolution().slice(0, 3);
       let secondThird = testSudoku.renderSolution().slice(3, 6);;
       let thirdThird = testSudoku.renderSolution().slice(6);
 
-      firstThird.forEach(row => {
-        row.forEach((el, i) => {
-          switch (true) {
-            case (i < 3) : subGrids[0] = [...subGrids[0], el]; break;
-            case (i < 6) : subGrids[1] = [...subGrids[1], el]; break;
-            default : subGrids[2] = [...subGrids[2], el]; break;
-          }
-        });
-      });
-
-      secondThird.forEach(row => {
-        row.forEach((el, i) => {
-          switch (true) {
-            case (i < 3) : subGrids[3] = [...subGrids[3], el]; break;
-            case (i < 6) : subGrids[4] = [...subGrids[4], el]; break;
-            default : subGrids[5] = [...subGrids[5], el]; break;
-          }
-        });
-      });
-
-      thirdThird.forEach(row => {
-        row.forEach((el, i) => {
-          switch (true) {
-            case (i < 3) : subGrids[6] = [...subGrids[6], el]; break;
-            case (i < 6) : subGrids[7] = [...subGrids[7], el]; break;
-            default : subGrids[8] = [...subGrids[8], el]; break;
-          }
-        });
-      });
+      gatherSubGrids(subGrids, firstThird, 0, 1, 2);
+      gatherSubGrids(subGrids, secondThird, 3, 4, 5);
+      gatherSubGrids(subGrids, thirdThird, 6, 7, 8);
 
       subGrids.every(subGrid => expect(Array.from(new Set(subGrid))).toHaveLength(9));
     });
   });
 
   it('renders a different grid every time', () => {
-    const secondTestSudoku = new SudokuModel();
+    let secondTestSudoku;
+    let secondTestGrid;
+    
+    secondTestSudoku = new SudokuModel();
     secondTestSudoku.generateGrid();
-    const secondTestGrid = secondTestSudoku.renderSolution();
+    secondTestGrid = secondTestSudoku.renderSolution();
 
     expect(JSON.stringify(testGrid)).not.toEqual(JSON.stringify(secondTestGrid));
   });
@@ -95,25 +84,15 @@ describe(SudokuModel, () => {
       return allValues.filter(el => el !== 0);
     }
 
-    it('can render a version of the grid with only 36 clues', () => {
-      testSudoku.generatePartial('Easy');
-      expect(allClues()).toHaveLength(36);
-    });
+    const runGridsWithCluesTestWith = (difficulty, expected) => {
+      testSudoku.generatePartial(difficulty);
+      expect(allClues()).toHaveLength(expected);
+    }
 
-    it('can render a version of the grid with only 27 clues', () => {
-      testSudoku.generatePartial('Medium');
-      expect(allClues()).toHaveLength(27);
-    });
-
-    it('can render a version of the grid with only 21 clues', () => {
-      testSudoku.generatePartial('Hard');
-      expect(allClues()).toHaveLength(21);
-    });
-
-    it('can render a version of the grid with only 17 clues', () => {
-      testSudoku.generatePartial('Expert');
-      expect(allClues()).toHaveLength(17);
-    });
+    it('can render a version of the grid with only 36 clues', () => runGridsWithCluesTestWith('Easy', 36));
+    it('can render a version of the grid with only 27 clues', () => runGridsWithCluesTestWith('Medium', 27));
+    it('can render a version of the grid with only 21 clues', () => runGridsWithCluesTestWith('Hard', 21));
+    it('can render a version of the grid with only 17 clues', () => runGridsWithCluesTestWith('Expert', 17));
   });
 
   describe('entering a guess', () => {

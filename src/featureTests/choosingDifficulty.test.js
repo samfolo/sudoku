@@ -55,7 +55,7 @@ describe('choosing a difficulty', () => {
   
       button.simulate('click');
       playButton.simulate('click');
-      
+
       filledCells = wrapper.findWhere((n) => n.prop('value') !== 0 && n.name() === 'Cell');
 
       expect(filledCells).toHaveLength(expected);
@@ -66,5 +66,4 @@ describe('choosing a difficulty', () => {
     test('a user selects a `Hard` difficulty then presses play', () => runTestWith(hardButton, 21));
     test('a user selects an `Expert` difficulty then presses play', () => runTestWith(expertButton, 17));
   });
-  
 });

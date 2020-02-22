@@ -6,30 +6,27 @@ import SudokuPage from '../SudokuPage/SudokuPage';
 import SudokuModel from '../../models/SudokuModel/SudokuModel';
 import SettingsPage from '../SettingsPage/SettingsPage';
 
-const sudokuModel = new SudokuModel();
-sudokuModel.generateGrid();
-sudokuModel.generatePartial('Easy');
-
 const App = () => {
-  const [model, setModel] = useState(sudokuModel);
+  const [model, setModel] = useState(undefined);
   const [inGame, setInGame] = useState(false);
 
   const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
-    setModel(sudokuModel);
+    setModel(model);
   }
 
   const handleSolve = () => {
     model.fillPartial();
-    setModel(sudokuModel);
+    setModel(model);
   };
   
   const handleCellClearing = coord => {
     model.clearCell(coord);
-    setModel(sudokuModel);
+    setModel(model);
   }
 
   const handleSetup = difficulty => {
+    const sudokuModel = new SudokuModel();
     sudokuModel.generateGrid();
     sudokuModel.generatePartial(difficulty);
     setModel(sudokuModel);
@@ -47,7 +44,8 @@ const App = () => {
         )} />
         <Route path="/play" render={() => (
           <SudokuPage 
-            model={model} 
+            model={model}
+            inGame={inGame}
             onClick={handleCellClick}
             onClear={handleCellClearing}
             showSolution={handleSolve} />

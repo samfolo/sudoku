@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import { findByTestAttr } from '../testHelpers';
+import { findByTestAttr, beginGame } from '../testHelpers';
 
 import App from '../containers/App/App';
 
@@ -10,10 +10,12 @@ describe('showing solution', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <MemoryRouter initialEntries={["/play"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter> 
     );
+
+    beginGame(wrapper, 'Easy');
   });
   
   test('a user wants to see the full solution', () => {

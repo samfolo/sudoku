@@ -35,8 +35,6 @@ const SudokuPage = props => {
     setLastClicked(coord);
   }
 
-  
-
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
 
   let tryAgain;
@@ -65,7 +63,7 @@ const SudokuPage = props => {
         onClick={handleNumberSelection} />
 
       {tryAgain}
-      
+
       <div className={Classes.Buttons}>
         <Button
           data-test="show-solution"

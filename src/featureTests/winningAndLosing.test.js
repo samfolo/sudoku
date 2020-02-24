@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { beginGame, findByTestAttr } from '../testHelpers';
 import App from '../containers/App/App';
 
-describe('unselecting squares', () => {
+describe('winning and losing', () => {
   let wrapper;
   let emptyCells;
   let selectedNumber;
@@ -26,7 +26,7 @@ describe('unselecting squares', () => {
 
     emptyCells = wrapper.findWhere((n) => n.prop('value') === 0 && n.name() === 'Cell');
     emptyCells.forEach(cell => cell.simulate('click'));
-    
-    expect(wrapper).toContain('Try again?');
+
+    expect(wrapper.text()).toContain('Try again?');
   });
 });

@@ -9,9 +9,11 @@ import SettingsPage from '../SettingsPage/SettingsPage';
 const App = () => {
   const [model, setModel] = useState(undefined);
   const [inGame, setInGame] = useState(false);
+  const [fullBoard, setFullBoard] = useState(false);
 
   const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
+    setFullBoard(model.cellsLeft() === 0);
     setModel(model);
   }
 
@@ -48,7 +50,7 @@ const App = () => {
           onClick={handleCellClick}
           onClear={handleCellClearing}
           showSolution={handleSolve} 
-          fullBoard={() => { return model.cellsLeft() === 0 }} />
+          fullBoard={fullBoard} />
       )} />
       <Redirect to='/' />
     </Switch>

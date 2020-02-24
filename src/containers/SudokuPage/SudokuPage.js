@@ -39,6 +39,14 @@ const SudokuPage = props => {
 
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
 
+  let tryAgain;
+  if (props.fullBoard) tryAgain = (
+    <Button 
+      data-test="try-again"
+      text={'Try again?'}
+      onClick={() => {}} />
+  );
+
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       { (props.inGame || props.test) ? null : <Redirect to="/" /> }
@@ -56,8 +64,10 @@ const SudokuPage = props => {
         selectedNumber={selectedNumber}
         onClick={handleNumberSelection} />
 
+      {tryAgain}
+      
       <div className={Classes.Buttons}>
-        <Button 
+        <Button
           data-test="show-solution"
           text={'Show Solution'}
           onClick={handleSolve} />

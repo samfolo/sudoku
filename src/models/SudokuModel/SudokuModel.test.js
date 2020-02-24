@@ -154,6 +154,10 @@ describe(SudokuModel, () => {
     });
 
     describe('cellsLeft()', () => {
+      it('returns 81 after 6 cells are filled on a blank 9 x 9 grid', () => {
+        expect(testSudoku.cellsLeft()).toBe(81);
+      });
+
       it('returns 78 after 3 cells are filled on a blank 9 x 9 grid', () => {
         testSudoku.fillCell([6, 6], 2);
         testSudoku.fillCell([4, 1], 9);

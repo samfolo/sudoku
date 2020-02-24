@@ -47,7 +47,8 @@ const App = () => {
           inGame={inGame}
           onClick={handleCellClick}
           onClear={handleCellClearing}
-          showSolution={handleSolve} />
+          showSolution={handleSolve} 
+          fullBoard={() => { return model.cellsLeft() === 0 }} />
       )} />
       <Redirect to='/' />
     </Switch>

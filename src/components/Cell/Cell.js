@@ -11,6 +11,7 @@ const Cell = props => {
   useEffect(() => {
     if (props.value !== 0) setIsFilled(true);
     if (props.isSolved) setIsEditable(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isSolved]);
 
   const handleTemporaryFill = number => {
@@ -67,9 +68,18 @@ const Cell = props => {
     return value;
   }
 
-  const color = isEditable ? 'blue' : 'black';
+
+  const getEndGameColor = () => {
+    const wrongValue = props.diff.some((coord) => coord[0] === props.coord[0] && coord[1] === props.coord[1]);
+    if (props.fullBoard && wrongValue) return 'rgba(255, 0, 0, 0.379)'
+    if (props.fullBoard && props.diff.length === 0) return 'rgba(47, 188, 44, 0.2)';
+  }
+
+  let color = isEditable ? 'blue' : 'black';
+  if (props.fullBoard && props.diff.length === 0) color = 'rgba(47, 188, 44)';
+  const backgroundColor = getEndGameColor();
   return (
-    <div className={Classes.Cell} data-test="component-cell" onClick={handleClick}>
+    <div className={Classes.Cell} data-test="component-cell" onClick={handleClick} style={{ backgroundColor }}>
       <span className={Classes.InnerText} style={{ color }}>{getValue()}</span>
     </div>
   );

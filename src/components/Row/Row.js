@@ -11,10 +11,12 @@ const Row = props => {
           key={`${index}${props.yCoord}_cell`}
           id={`${index}${props.yCoord}_cell`}
           value={cell}
+          diff={props.diff}
           onClick={props.onClick}
           onClear={props.onClear}
           coord={[index, props.yCoord]}
           isSolved={props.isSolved}
+          fullBoard={props.fullBoard}
           isTemporaryFill={props.isTemporaryFill}
           selectedNumber={props.selectedNumber}
           data-test="cell" />

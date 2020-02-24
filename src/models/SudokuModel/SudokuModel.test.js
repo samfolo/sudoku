@@ -198,6 +198,7 @@ describe(SudokuModel, () => {
       let tempSudoku;
       let wrongPartial;
 
+      // assigns an incorrect number between 1 and 9 to the target coordinate
       const assignIncorrectGuessAt = (grid, xCoord, yCoord) => {
         let randomNumber = Math.floor(Math.random() * 9) + 1;
         while (grid[yCoord][xCoord] === randomNumber) { randomNumber = Math.floor(Math.random() * 9) + 1; }
@@ -228,6 +229,12 @@ describe(SudokuModel, () => {
         testSudoku = new SudokuModel(testSolution, wrongPartial);
         
         expect(testSudoku.getIncorrectCoordinates()).toEqual([[6, 4], [5, 5], [3, 8]]);
+      });
+
+      it('returns [] when the partial matches the solution', () => {
+        testSudoku = new SudokuModel(testSolution, wrongPartial);
+        
+        expect(testSudoku.getIncorrectCoordinates()).toEqual([]);
       });
     });
   });

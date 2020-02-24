@@ -50,8 +50,10 @@ const SudokuPage = props => {
       { (props.inGame || props.test) ? null : <Redirect to="/" /> }
       <Sudoku 
         data-test="sudoku" 
+        diff={props.diff}
         model={props.model}
         isSolved={isSolved}
+        fullBoard={props.fullBoard}
         selectedNumber={selectedNumber}
         isTemporaryFill={isTemporaryFill}
         onClear={handleCellClearing}

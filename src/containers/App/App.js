@@ -10,11 +10,18 @@ const App = () => {
   const [model, setModel] = useState(undefined);
   const [inGame, setInGame] = useState(false);
   const [fullBoard, setFullBoard] = useState(false);
+  const [incorrectCoordinates, setIncorrectCoordinates] = useState([]);
 
   const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
-    setFullBoard(model.cellsLeft() === 0);
+    monitorGameProgress();
+    // console.log(model.renderSolution()) // debugging
     setModel(model);
+  }
+
+  const monitorGameProgress = () => {
+    setFullBoard(model.cellsLeft() === 0);
+    setIncorrectCoordinates(model.getIncorrectCoordinates());
   }
 
   const handleSolve = () => {
@@ -47,10 +54,11 @@ const App = () => {
         <SudokuPage 
           model={model}
           inGame={inGame}
+          fullBoard={fullBoard}
           onClick={handleCellClick}
           onClear={handleCellClearing}
-          showSolution={handleSolve} 
-          fullBoard={fullBoard} />
+          showSolution={handleSolve}
+          diff={incorrectCoordinates} />
       )} />
       <Redirect to='/' />
     </Switch>

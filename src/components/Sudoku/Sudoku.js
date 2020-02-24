@@ -16,9 +16,11 @@ const Sudoku = props => {
           id={`${index}_row`}
           values={row}
           yCoord={index}
+          diff={props.diff}
           onClick={handleClick}
           onClear={props.onClear}
           isSolved={props.isSolved}
+          fullBoard={props.fullBoard}
           isTemporaryFill={props.isTemporaryFill}
           selectedNumber={props.selectedNumber}
           data-test="row" />

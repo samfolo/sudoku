@@ -16,14 +16,14 @@ describe('interacting with the grid', () => {
   
   beforeEach(() => {
     testGrid = new SudokuModel(undefined, generateGrid([]));
-    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} test />);
+    wrapper = mount(<SudokuPage diff={[]} model={testGrid} onFill={mockClick} test />);
     testCell = wrapper.find({ value: 0}).first();
     testCoord = testCell.prop('coord');
   });
 
   test('a user places the number 5 at the center of a grid', () => {
     mockClick = fillCellAt(testCoord, 5);
-    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} test />);
+    wrapper = mount(<SudokuPage  diff={[]} model={testGrid} onFill={mockClick} test />);
 
     testCell = wrapper.find({ coord: testCoord });
     expect(testCell.prop('value')).toBe(5);
@@ -31,7 +31,7 @@ describe('interacting with the grid', () => {
 
   test('a user places the number 7 at [6, 5]', () => {
     mockClick = fillCellAt(testCoord, 7);
-    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} test />);
+    wrapper = mount(<SudokuPage  diff={[]} model={testGrid} onFill={mockClick} test />);
 
     testCell = wrapper.find({ coord: testCoord });
     expect(testCell.prop('value')).toBe(7);
@@ -39,7 +39,7 @@ describe('interacting with the grid', () => {
 
   test('a user places the number 1 in an empty square', () => {
     mockClick = fillCellAt(testCoord, 1);
-    wrapper = mount(<SudokuPage model={testGrid} onFill={mockClick} test />);
+    wrapper = mount(<SudokuPage  diff={[]} model={testGrid} onFill={mockClick} test />);
 
     testCell = wrapper.find({ coord: testCoord });
     expect(testCell.prop('value')).toBe(1);

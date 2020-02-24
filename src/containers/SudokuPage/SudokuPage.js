@@ -35,51 +35,54 @@ const SudokuPage = props => {
     setLastClicked(coord);
   }
 
-  const handleClick = () => props.onReplay();
+  const handleClick = () => {
+    setIsTemporaryFill(false);
+    setLastClicked(null);
+    setSelectedNumber(0);
+    setIsSolved(false);
+    props.onReplay();
+  }
 
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
-
-  let tryAgain;
-  if (props.fullBoard) tryAgain = (
-    <Button 
-      data-test="try-again"
-      text={'Try again?'}
-      onClick={handleClick} />
-  );
 
   return (
     <div data-test="component-sudoku-page" className={Classes.SudokuPage}>
       { (props.inGame || props.test) ? null : <Redirect to="/" /> }
-      <Sudoku 
-        data-test="sudoku" 
-        diff={props.diff}
-        model={props.model}
-        isSolved={isSolved}
-        fullBoard={props.fullBoard}
-        selectedNumber={selectedNumber}
-        isTemporaryFill={isTemporaryFill}
-        onClear={handleCellClearing}
-        onClick={handleCellFilling} />
+      <div className={Classes.Widget}>
+        <Sudoku 
+          data-test="sudoku" 
+          diff={props.diff}
+          model={props.model}
+          isSolved={isSolved}
+          fullBoard={props.fullBoard}
+          selectedNumber={selectedNumber}
+          isTemporaryFill={isTemporaryFill}
+          onClear={handleCellClearing}
+          onClick={handleCellFilling} />
 
-      <NumberSelector 
-        data-test="number-selector"
-        selectedNumber={selectedNumber}
-        onClick={handleNumberSelection} />
+        <NumberSelector 
+          data-test="number-selector"
+          selectedNumber={selectedNumber}
+          onClick={handleNumberSelection} />
 
-      {tryAgain}
-
-      <div className={Classes.Buttons}>
-        <Button
-          data-test="show-solution"
-          text={'Show Solution'}
-          onClick={handleSolve} />
-        <Button 
-          data-test="temporary-fill"
-          width={'1em'}
-          height={'1em'}
-          backgroundClass={'Pencil'}
-          backgroundColor={isTemporaryFill ? 'aliceblue' : null}
-          onClick={toggleTemporaryFill} />
+        <div className={Classes.Buttons}>
+          <Button
+            data-test="show-solution"
+            text={'Solution'}
+            height={'4vh'}
+            borderRadius={'99rem'}
+            onClick={handleSolve} />
+          <Button 
+            data-test="temporary-fill"
+            backgroundClass={'Pencil'}
+            width={'4vh'} height={'4vh'}
+            backgroundColor={isTemporaryFill ? '#21ffda' : null}
+            onClick={toggleTemporaryFill} />
+          <Button 
+            data-test="try-again"
+            text={'Restart'}
+            onClick={handleClick} />
+        </div>
       </div>
     </div>
   );

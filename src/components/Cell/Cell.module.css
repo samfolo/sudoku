@@ -1,16 +1,17 @@
 .Cell {
   width: 6vh;
   height: 6vh;
-  border: 1px solid rgba(102, 33, 33, 0.418);
+  border: 1px solid #636363;
+  background: #1e1e1e;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: 0.15s;
+  margin: 0.1em;
 }
 
 .Cell:hover {
-  background-color: aliceblue;
+  box-shadow: 0 0 20px #72ffe737;
 }
 
 .InnerText {
@@ -21,15 +22,15 @@
 }
 
 .Cell:nth-child(3n) {
-  border-right: 2px solid rgb(102, 33, 33);
+  border-right: 1px solid #636363;
 }
 
 .Cell:nth-child(3n + 1) {
-  border-left: 2px solid rgb(102, 33, 33);
+  border-left: 1px solid #636363;
 }
 
 .Cell:first-child {
-  border-left: 2px solid rgb(102, 33, 33);
+  border-left: 1px solid #636363;
 }
 
 .SubRow {

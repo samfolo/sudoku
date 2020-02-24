@@ -71,11 +71,11 @@ const Cell = props => {
 
   const getEndGameColor = () => {
     const wrongValue = props.diff.some((coord) => coord[0] === props.coord[0] && coord[1] === props.coord[1]);
-    if (props.fullBoard && wrongValue) return 'rgba(255, 0, 0, 0.379)'
-    if (props.fullBoard && props.diff.length === 0) return 'rgba(47, 188, 44, 0.2)';
+    if (props.fullBoard && wrongValue) return 'rgba(255, 0, 0, 0.1)'
+    if (props.fullBoard && props.diff.length === 0) return 'rgba(47, 188, 44, 0.1)';
   }
 
-  let color = isEditable ? 'blue' : 'black';
+  let color = isEditable ? '#21ffda' : '#636363';
   if (props.fullBoard && props.diff.length === 0) color = 'rgba(47, 188, 44)';
   const backgroundColor = getEndGameColor();
   return (

@@ -15,7 +15,7 @@ const App = () => {
   const handleCellClick = (coord, value) => {
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
     monitorGameProgress();
-    // console.log(model.renderSolution()) // debugging
+    console.log(model.renderSolution()) // debugging
     setModel(model);
   }
 
@@ -43,6 +43,8 @@ const App = () => {
   }
 
   const handleReplay = () => {
+    setIncorrectCoordinates([]);
+    setFullBoard(false);
     setModel(undefined);
     setInGame(false);
   }

@@ -7,7 +7,11 @@ const Button = props => {
   return (
     <div 
       className={[Classes[props.backgroundClass], Classes.Button].join(' ')}
-      style={{ backgroundColor, width: props.width, height: props.height, }}
+      style={{ 
+        backgroundColor, 
+        width: props.width, 
+        height: props.height,
+        borderRadius: props.borderRadius, }}
       onClick={props.onClick}
       data-test="component-button">
         {props.text}

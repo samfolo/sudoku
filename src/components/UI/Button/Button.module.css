@@ -1,13 +1,30 @@
 .Button {
-  border: 1px solid red;
-  padding: 1em;
-  border-radius: 1em;
-  margin: 5px;
+  /* border: 1px solid #636363; */
+  font-size: 3.5vh;
+  line-height: 1.2;
+  border-radius: 5em;
+  text-align: center;
   cursor: pointer;
+  width: 35%;
+  padding: 0.5em;
+  margin: 5px;
+  color: #636363;
+  transition: 0.2s;
+}
+
+.Button:hover {
+  color: #21ffda;
 }
 
 .Pencil {
   background: url('../../../images/pencil.png') center center;
+  background-repeat: no-repeat;
+  background-size: 60% 60%; 
+  border-radius: 99em;
+}
+
+.Pencil:hover {
+  background: url('../../../images/pencil hover.png') center center;
   background-repeat: no-repeat;
   background-size: 60% 60%; 
   border-radius: 99em;

@@ -1,13 +1,19 @@
 .NumberButton {
-  width: 4vh;
-  height: 4vh;
+  width: 5vh;
+  height: 5vh;
   margin: 0.5vh;
   border-radius: 100%;
-  border: 1px solid red;
+  border: 1px solid transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.NumberButton:hover {
+  border: 1px solid #21ffda;
+  
 }
 
 .Number {

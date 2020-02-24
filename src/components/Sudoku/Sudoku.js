@@ -24,7 +24,7 @@ const Sudoku = props => {
           isTemporaryFill={props.isTemporaryFill}
           selectedNumber={props.selectedNumber}
           data-test="row" />
-      )
+      );
     });
     return rows;
   }

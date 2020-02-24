@@ -108,10 +108,22 @@ export default class SudokuModel {
     }
   }
 
+  clearCell = coord => this.partial[coord[1]][coord[0]] = 0;
+
   cellsLeft = () => {
     const allValues = this.partial.reduce((acc, val) => acc.concat(val), [])
     return allValues.filter(value => value === 0).length;
   }
 
-  clearCell = coord => this.partial[coord[1]][coord[0]] = 0;
+  getIncorrectCoordinates = () => {
+    let incorrectCoordinates = [];
+    for (let y = 0; y < 9; y++) {
+      for (let x = 0; x < 9; x++) {
+        if (this.solution[y][x] !== this.partial[y][x]) {
+          incorrectCoordinates = [...incorrectCoordinates, [x, y]];
+        }
+      }
+    }
+    return incorrectCoordinates;
+  }
 };

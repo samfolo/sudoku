@@ -192,5 +192,32 @@ describe(SudokuModel, () => {
         expect(testSudoku.cellsLeft()).toBe(75);
       });
     });
+
+    describe('getIncorrectCoordinates()', () => {
+      let testSolution;
+      let tempSudoku;
+      let wrongPartial;
+
+      const assignIncorrectGuessAt = (grid, xCoord, yCoord) => {
+        let randomNumber = Math.floor(Math.random() * 9) + 1;
+        while (grid[yCoord][xCoord] === randomNumber) { randomNumber = Math.floor(Math.random() * 9) + 1; }
+        return randomNumber;
+      }
+
+      beforeEach(() => {
+        tempSudoku = new SudokuModel();
+        tempSudoku.generateGrid();
+        testSolution = tempSudoku.renderSolution();
+      });
+
+      it('returns [[0, 0]] when these coordinates differ from the correct solution', () => {
+        wrongPartial = [...testSolution].map((_, i) => [...testSolution[i]]);
+        wrongPartial[0][0] = assignIncorrectGuessAt(wrongPartial, 0, 0);
+
+        testSudoku = new SudokuModel(testSolution, wrongPartial);
+        
+        expect(testSudoku.getIncorrectCoordinates()).toEqual([[0, 0]]);
+      });
+    });
   });
 });

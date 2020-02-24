@@ -69,7 +69,7 @@ export default class SudokuModel {
       case 'Medium': numberOfClues = 27; break;
       case 'Hard': numberOfClues = 21; break;
       case 'Expert': numberOfClues = 17; break;
-      default: return null;
+      default: throw new Error();
     }
     // generating random coordinates, used to place clues:
     let clueCoordinates = [];

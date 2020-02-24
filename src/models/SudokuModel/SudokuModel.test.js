@@ -93,6 +93,10 @@ describe(SudokuModel, () => {
     it('can render a version of the grid with only 27 clues', () => runGridsWithCluesTestWith('Medium', 27));
     it('can render a version of the grid with only 21 clues', () => runGridsWithCluesTestWith('Hard', 21));
     it('can render a version of the grid with only 17 clues', () => runGridsWithCluesTestWith('Expert', 17));
+
+    it('throws an error when passed an invalid difficulty', () => {
+      expect(() => { testSudoku.generatePartial('Unbelievably Hard, Basically Impossible') }).toThrowError();
+    });
   });
 
   describe('entering a guess', () => {
@@ -164,6 +168,17 @@ describe(SudokuModel, () => {
         testSudoku.fillCell([3, 8], 7);
 
         expect(testSudoku.cellsLeft()).toBe(78);
+      });
+
+      it('returns 79 after 3 cells are filled and one is cleared on a blank 9 x 9 grid', () => {
+        testSudoku.fillCell([6, 6], 2);
+        testSudoku.fillCell([4, 1], 9);
+        testSudoku.fillCell([3, 8], 7);
+        
+        // toggles fill if coordinate is already occupied
+        testSudoku.fillCell([6, 6], 2);
+
+        expect(testSudoku.cellsLeft()).toBe(79);
       });
 
       it('returns 75 after 6 cells are filled on a blank 9 x 9 grid', () => {

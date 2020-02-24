@@ -59,6 +59,14 @@ describe('a pencilled-in square', () => {
     const temporaryFillButton = findByTestAttr(wrapper, 'temporary-fill');
     temporaryFillButton.simulate('click');
 
+    // first pencil in an '8' (in error)
+    selectedNumber = wrapper.find({ id: '8_numberButton' });
+    selectedNumber.simulate('click');
+    testCell.simulate('click');
+
+    // remove the '8'
+    testCell.simulate('click');
+
     selectedNumber = wrapper.find({ id: '4_numberButton' });
     selectedNumber.simulate('click');
     testCell.simulate('click');

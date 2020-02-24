@@ -1,10 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import { generateGrid } from '../testHelpers';
 
 import SudokuPage from '../containers/SudokuPage/SudokuPage';
 import SudokuModel from '../models/SudokuModel/SudokuModel';
-import { generateGrid } from '../testHelpers';
 
 describe('interacting with the grid', () => {
   let wrapper;

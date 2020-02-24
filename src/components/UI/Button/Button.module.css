@@ -6,7 +6,7 @@
   cursor: pointer;
 }
 
-.TemporaryFill {
+.Pencil {
   background: url('../../../images/pencil.png') center center;
   background-repeat: no-repeat;
   background-size: 60% 60%; 

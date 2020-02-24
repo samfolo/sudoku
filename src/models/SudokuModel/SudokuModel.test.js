@@ -70,7 +70,7 @@ describe(SudokuModel, () => {
   it('renders a different grid every time', () => {
     let secondTestSudoku;
     let secondTestGrid;
-    
+
     secondTestSudoku = new SudokuModel();
     secondTestSudoku.generateGrid();
     secondTestGrid = secondTestSudoku.renderSolution();
@@ -96,13 +96,32 @@ describe(SudokuModel, () => {
   });
 
   describe('entering a guess', () => {
-    let emptyGrid = generateGrid([]);
+    let emptyGrid;
 
     beforeEach(() => {
+      emptyGrid = generateGrid([]);
       testSudoku = new SudokuModel(undefined, emptyGrid);
     })
 
     describe('fillCell()', () => {
+      it('does not replace the targeted value [8, 8] with `twelve` when passed [8, 8] && `twelve`', () => {
+        testSudoku.fillCell([8, 8], 'twelve');
+        expect(testSudoku.renderPartial()[8][8]).toBe(0);
+        expect(testSudoku.renderPartial()[8][8]).not.toBe('twelve');
+      });
+
+      it('does not replace the targeted value [6, 1] with 13 when passed [6, 1] && 13', () => {
+        testSudoku.fillCell([6, 1], 13);
+        expect(testSudoku.renderPartial()[1][6]).toBe(0);
+        expect(testSudoku.renderPartial()[1][6]).not.toBe(13);
+      });
+
+      it('does not replace the targeted value [4, 7] with -2 when passed [4, 7] && -2', () => {
+        testSudoku.fillCell([4, 7], -2);
+        expect(testSudoku.renderPartial()[7][4]).toBe(0);
+        expect(testSudoku.renderPartial()[7][4]).not.toBe(-2);
+      });
+
       it('replaces the targeted value [5, 5] with 8 when passed [5, 5] && 8', () => {
         testSudoku.fillCell([5, 5], 8);
         expect(testSudoku.renderPartial()[5][5]).toBe(8);
@@ -112,33 +131,11 @@ describe(SudokuModel, () => {
         testSudoku.fillCell([3, 4], 2);
         expect(testSudoku.renderPartial()[4][3]).toBe(2);
       });
-
-      it('does not replace the targeted value [8, 8] with `twelve` when passed [8, 8] && `twelve`', () => {
-        testSudoku.fillCell([8, 8], 'twelve');
-        expect(testSudoku.renderPartial()[8][8]).not.toBe('twelve');
-        expect(testSudoku.renderPartial()[8][8]).toBe(0);
-      });
-
-      it('does not replace the targeted value [6, 1] with 13 when passed [6, 1] && 13', () => {
-        testSudoku.fillCell([6, 1], 13);
-        expect(testSudoku.renderPartial()[1][6]).not.toBe(13);
-        expect(testSudoku.renderPartial()[1][6]).toBe(0);
-      });
-
-      it('does not replace the targeted value [4, 7] with -2 when passed [4, 7] && -2', () => {
-        testSudoku.fillCell([4, 7], -2);
-        expect(testSudoku.renderPartial()[7][4]).not.toBe(-2);
-        expect(testSudoku.renderPartial()[7][4]).toBe(0);
-      });
     });
 
     describe('clearCell()', () => {
-      it('replaces the targeted value [5, 5] with 0 when passed [5, 5] && 8', (done) => {
-        setTimeout(() => {
-          testSudoku.fillCell([5, 5], 8);
-          done();
-        });
-
+      it('replaces the targeted value [5, 5] with 0 when passed [5, 5] && 8', () => {
+        testSudoku.fillCell([5, 5], 8);
         expect(testSudoku.renderPartial()[5][5]).toBe(8);
         
         testSudoku.clearCell([5, 5]);
@@ -153,6 +150,27 @@ describe(SudokuModel, () => {
         const allValues = testSudoku.renderPartial().reduce((acc, val) => acc.concat(val), []);
         const emptyValues = allValues.filter(value => value === 0);
         expect(emptyValues).toHaveLength(0)
+      });
+    });
+
+    describe('cellsLeft()', () => {
+      it('returns 78 after 3 cells are filled on a blank 9 x 9 grid', () => {
+        testSudoku.fillCell([6, 6], 2);
+        testSudoku.fillCell([4, 1], 9);
+        testSudoku.fillCell([3, 8], 7);
+
+        expect(testSudoku.cellsLeft()).toBe(78);
+      });
+
+      it('returns 75 after 6 cells are filled on a blank 9 x 9 grid', () => {
+        testSudoku.fillCell([6, 6], 2);
+        testSudoku.fillCell([4, 1], 9);
+        testSudoku.fillCell([3, 8], 7);
+        testSudoku.fillCell([1, 1], 4);
+        testSudoku.fillCell([3, 2], 5);
+        testSudoku.fillCell([0, 0], 8);
+
+        expect(testSudoku.cellsLeft()).toBe(75);
       });
     });
   });

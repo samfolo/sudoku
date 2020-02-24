@@ -108,5 +108,10 @@ export default class SudokuModel {
     }
   }
 
+  cellsLeft = () => {
+    const allValues = this.partial.reduce((acc, val) => acc.concat(val), [])
+    return allValues.filter(value => value === 0).length;
+  }
+
   clearCell = coord => this.partial[coord[1]][coord[0]] = 0;
 };

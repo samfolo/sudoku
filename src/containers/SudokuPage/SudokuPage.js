@@ -35,6 +35,8 @@ const SudokuPage = props => {
     setLastClicked(coord);
   }
 
+  
+
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
 
   return (
@@ -63,7 +65,7 @@ const SudokuPage = props => {
           data-test="temporary-fill"
           width={'1em'}
           height={'1em'}
-          backgroundClass={'TemporaryFill'}
+          backgroundClass={'Pencil'}
           backgroundColor={isTemporaryFill ? 'aliceblue' : null}
           onClick={toggleTemporaryFill} />
       </div>

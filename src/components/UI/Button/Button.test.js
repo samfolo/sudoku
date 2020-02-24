@@ -1,7 +1,7 @@
 import Button from './Button';
 import { setup, findByTestAttr } from '../../../testHelpers';
 
-describe('<Number />', () => {
+describe('<Button />', () => {
   let wrapper;
   let buttonComponent;
 

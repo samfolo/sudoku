@@ -1,0 +1,30 @@
+.DifficultyButton {
+  width: 40%;
+  min-width: 300px;
+  max-width: 500px;
+  height: 20%;
+  margin: 0.5em;
+  border-radius: 1em;
+  border: 1px solid #636363;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  color: #636363;
+  font-size: 1.2em;
+  transition: 0.2s;
+}
+
+.DifficultyButtonText {
+  width: 100%;
+  
+  cursor: pointer;
+}
+
+.DifficultyButton:hover {
+  color: #21ffda;
+  border: 1px solid #21ffda;
+}
+

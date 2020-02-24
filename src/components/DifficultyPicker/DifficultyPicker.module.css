@@ -1,0 +1,9 @@
+.DifficultyPicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 45%;
+  margin-bottom: 3vh;
+  justify-content: center;
+}

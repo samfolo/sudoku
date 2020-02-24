@@ -205,18 +205,29 @@ describe(SudokuModel, () => {
       }
 
       beforeEach(() => {
+        // tempSudoku generates a correct solution:
         tempSudoku = new SudokuModel();
         tempSudoku.generateGrid();
+
         testSolution = tempSudoku.renderSolution();
+        wrongPartial = [...testSolution].map((_, i) => [...testSolution[i]]);
       });
 
       it('returns [[0, 0]] when these coordinates differ from the correct solution', () => {
-        wrongPartial = [...testSolution].map((_, i) => [...testSolution[i]]);
         wrongPartial[0][0] = assignIncorrectGuessAt(wrongPartial, 0, 0);
-
         testSudoku = new SudokuModel(testSolution, wrongPartial);
         
         expect(testSudoku.getIncorrectCoordinates()).toEqual([[0, 0]]);
+      });
+
+      it('returns [[6, 4], [5, 5], [3, 8]] when these coordinates differ from the correct solution', () => {
+        [[6, 4], [5, 5], [3, 8]].forEach(coord => {
+          wrongPartial[coord[1]][coord[0]] = assignIncorrectGuessAt(wrongPartial, coord[0], coord[1]);
+        });
+
+        testSudoku = new SudokuModel(testSolution, wrongPartial);
+        
+        expect(testSudoku.getIncorrectCoordinates()).toEqual([[6, 4], [5, 5], [3, 8]]);
       });
     });
   });

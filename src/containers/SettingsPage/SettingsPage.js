@@ -19,6 +19,7 @@ const SettingsPage = props => {
   return (
     <div className={Classes.DifficultyPicker} data-test="component-settings-page">
       { props.inGame ? <Redirect to="/play" /> : null }
+      <div>Choose a difficulty</div>
       <DifficultyPicker
         onChange={handleDifficultyChange}
         currentDifficulty={currentDifficulty}

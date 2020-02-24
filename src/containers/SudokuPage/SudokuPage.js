@@ -35,6 +35,8 @@ const SudokuPage = props => {
     setLastClicked(coord);
   }
 
+  const handleClick = () => props.onReplay();
+
   const toggleTemporaryFill = () => setIsTemporaryFill(!isTemporaryFill);
 
   let tryAgain;
@@ -42,7 +44,7 @@ const SudokuPage = props => {
     <Button 
       data-test="try-again"
       text={'Try again?'}
-      onClick={() => {}} />
+      onClick={handleClick} />
   );
 
   return (

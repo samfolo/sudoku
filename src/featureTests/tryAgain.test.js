@@ -4,10 +4,11 @@ import { MemoryRouter } from 'react-router-dom';
 import { beginGame, findByTestAttr } from '../testHelpers';
 import App from '../containers/App/App';
 
-describe('winning and losing', () => {
+describe('trying again', () => {
   let wrapper;
   let emptyCells;
   let selectedNumber;
+  let tryAgain;
 
   beforeEach(() => {
     wrapper = mount(
@@ -18,15 +19,16 @@ describe('winning and losing', () => {
     beginGame(wrapper, 'Easy');
   });
 
-  test('a player wins or loses a game', () => {
-    expect(wrapper).not.toContain('Try again?');
-
-    selectedNumber = wrapper.find({ id: '9_numberButton' });
+  test('a user wants to play again', () => {
+    selectedNumber = wrapper.find({ id: '6_numberButton' });
     selectedNumber.simulate('click');
 
     emptyCells = wrapper.findWhere((n) => n.prop('value') === 0 && n.name() === 'Cell');
     emptyCells.forEach(cell => cell.simulate('click'));
 
-    expect(wrapper.text()).toContain('Try again?');
+    tryAgain = findByTestAttr(wrapper, 'try-again');
+    tryAgain.simulate('click');
+    
+    expect(wrapper.text()).toContain('Choose a difficulty');
   });
 });

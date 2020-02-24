@@ -42,6 +42,11 @@ const App = () => {
     setInGame(true);
   }
 
+  const handleReplay = () => {
+    setModel(undefined);
+    setInGame(false);
+  }
+
   let routes = (
     <Switch>
       <Route path="/" exact render={() => (
@@ -55,6 +60,7 @@ const App = () => {
           model={model}
           inGame={inGame}
           fullBoard={fullBoard}
+          onReplay={handleReplay}
           onClick={handleCellClick}
           onClear={handleCellClearing}
           showSolution={handleSolve}

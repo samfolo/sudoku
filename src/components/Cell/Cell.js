@@ -28,6 +28,7 @@ const Cell = props => {
   }
 
   const handleClick = async () => {
+    if (props.fullBoard) return;
     const validClick = !props.isSolved && (!isFilled || isEditable);
     
     if (validClick && props.isTemporaryFill) {

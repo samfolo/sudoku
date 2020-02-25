@@ -73,7 +73,7 @@ I would like my placements to be easily visible against the grid
 
 > Users can assign, remove and reassign the value of any editable cell<br />
   To aid users in narrowing down the correct placements, users are able to place temporary guesses in empty cells<br />
-  The designs ensure users are easily able to keep track of self-assigned values.
+  The design ensures users are easily able to keep track of self-assigned values.
 
 <img src="images/Sudoku Mid-Game.png" />
 

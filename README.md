@@ -1,4 +1,5 @@
 # Sudoku
+[![Maintainability](https://api.codeclimate.com/v1/badges/22821d713c1085d97684/maintainability)](https://codeclimate.com/github/samfolo/sudoku/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/22821d713c1085d97684/test_coverage)](https://codeclimate.com/github/samfolo/sudoku/test_coverage)
 
 [Setup](#setup) | [Features](#features)
 

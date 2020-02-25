@@ -13,7 +13,7 @@ const App = () => {
   const [incorrectCoordinates, setIncorrectCoordinates] = useState([]);
 
   const handleCellClick = (coord, value) => {
-    // console.log(model.renderSolution()) // debugging
+    console.log(model.renderSolution()) // debugging
     value !== 0 ? model.fillCell(coord, value) : model.clearCell(coord);
     monitorGameProgress();
     setModel(model);

@@ -12,6 +12,7 @@
 
 .Cell:hover {
   box-shadow: 0 0 20px #72ffe737;
+  border: 1px solid #21ffda;
 }
 
 .InnerText {
@@ -21,7 +22,7 @@
   cursor: pointer;
 }
 
-.Cell:nth-child(3n) {
+/* .Cell:nth-child(3n) {
   border-right: 1px solid #636363;
 }
 
@@ -31,7 +32,7 @@
 
 .Cell:first-child {
   border-left: 1px solid #636363;
-}
+} */
 
 .SubRow {
   display: flex;

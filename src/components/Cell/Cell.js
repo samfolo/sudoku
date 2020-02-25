@@ -79,7 +79,12 @@ const Cell = props => {
   if (props.fullBoard && props.diff.length === 0) color = 'rgba(47, 188, 44)';
   const backgroundColor = getEndGameColor();
   return (
-    <div className={Classes.Cell} data-test="component-cell" onClick={handleClick} style={{ backgroundColor }}>
+    <div 
+      className={Classes.Cell} 
+      data-test="component-cell" 
+      onClick={handleClick}
+      id={props.id}
+      style={{ backgroundColor }}>
       <span className={Classes.InnerText} style={{ color }}>{getValue()}</span>
     </div>
   );

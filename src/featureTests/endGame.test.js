@@ -32,9 +32,18 @@ describe('trying again', () => {
     })[0];
     const incorrectCells = wrapper.findWhere((n => diff.includes(JSON.stringify(n.prop('coord')))));
 
-    // select an incorrect cell at random and click:
-    const randomCell = incorrectCells.at(Math.floor(Math.random() * incorrectCells.length - 1));
+    // select an 5 incorrects cells (coordinate independent) and click:
+    const randomCell = incorrectCells.at(0);
+    const randomCell2 = incorrectCells.at(4);
+    const randomCell3 = incorrectCells.at(9);
+    const randomCell4 = incorrectCells.at(20);
+    const randomCell5 = incorrectCells.at(35);
+
     randomCell.simulate('click');
+    randomCell2.simulate('click');
+    randomCell3.simulate('click');
+    randomCell4.simulate('click');
+    randomCell5.simulate('click');
     
     // find all empty cells and expect there to be none:
     emptyCells = wrapper.findWhere((n) => n.prop('value') === 0 && n.name() === 'Cell');

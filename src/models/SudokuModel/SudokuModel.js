@@ -1,3 +1,5 @@
+import solve from '../sudokuGenerator';
+
 export default class SudokuModel {
   constructor(grid = [], partial = []) {
     this.solution = grid;
@@ -5,18 +7,21 @@ export default class SudokuModel {
   }
 
   generateGrid = () => {
-    let grid = [];
     let preshuffledNumbers = [...Array(9).keys()].map(el => el + 1);
 
     // shuffle first row:
     let numbers = this.shuffle(preshuffledNumbers, 9);
 
-    // fill grid:
-    for (let i = 0; i < 9; i++) {
-      numbers = i % 3 === 0 ? [...numbers.slice(4), ...numbers.slice(0, 4)] : 
-        [...numbers.slice(3), ...numbers.slice(0, 3)];
-      grid = [...grid, numbers];
+    // fill grid with 8 other empty rows:
+    let grid = [numbers];
+    let emptyRow;
+    for (let i = 0; i < 8; i++) {
+      emptyRow = [...Array(9).keys()].map(_ => 0);
+      grid = [...grid, emptyRow];
     }
+
+    // generate solution from single row
+    grid = solve(grid);
     
     // shuffle rows per each third:
     grid = [

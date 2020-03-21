@@ -23,29 +23,31 @@ let grid = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const solve = (grid, col = 0, row = 1) => {
+const solve = (grid, col = 0, row = 0) => {
   let x = col;
   let y = row;
-  if (x === grid.length) {
-    x = 0;
-    y++;
-  }
 
-  if (y === grid.length) {
-    return true;
+  while (grid[y][x] !== 0) {
+    x++;
+    if (x >= grid.length) {
+      x = 0;
+      y++;
+    };
+    if (y === grid.length) {
+      return true;
+    }
   }
 
   for (let i = 1; i < 10; i++) {
-    if (grid[y][x] === 0) {
-      if (validPlacement(grid, i, x, y)) {
-        grid[y][x] = i;
-        if (solve(grid, x + 1, y)) {
-          return grid;
-        } else {
-          grid[y][x] = 0;
-        }
+    if (validPlacement(grid, i, x, y)) {
+      grid[y][x] = i;
+      if (solve(grid, x + 1, y)) {
+        return grid;
+      } else {
+        grid[y][x] = 0;
       }
     }
   }

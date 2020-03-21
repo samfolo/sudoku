@@ -7,28 +7,26 @@ export default class SudokuModel {
   }
 
   generateGrid = () => {
-    let preshuffledNumbers = [...Array(9).keys()].map(el => el + 1);
-
-    // shuffle first row:
-    let numbers = this.shuffle(preshuffledNumbers, 9);
-
-    // fill grid with 8 other empty rows:
-    let grid = [numbers];
+    // create empty grid:
+    let grid = [];
     let emptyRow;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       emptyRow = [...Array(9).keys()].map(_ => 0);
       grid = [...grid, emptyRow];
     }
 
-    // generate solution from single row
-    grid = solve(grid);
+    // place a random number in a random cell within these thirds [0, 0], [1, 1], [2, 2]
+    const randomNumberOne = Math.floor(Math.random() * 8) + 1;
+    const randomNumberTwo = Math.floor(Math.random() * 8) + 1;
+    const randomNumberThree = Math.floor(Math.random() * 8) + 1;
+
+    grid[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 3)] = randomNumberOne;
+    grid[Math.floor(Math.random() * 3) + 3][Math.floor(Math.random() * 3) + 3] = randomNumberTwo;
+    grid[Math.floor(Math.random() * 3) + 6][Math.floor(Math.random() * 3) + 6] = randomNumberThree;
     
-    // shuffle rows per each third:
-    grid = [
-      ...this.shuffle(grid.slice(0, 3), 3),
-      ...this.shuffle(grid.slice(3, 6), 3),
-      ...this.shuffle(grid.slice(6), 3),
-    ];
+    // generate solution
+    grid = solve(grid);
+    console.log(randomNumberOne, randomNumberTwo)
     
     // rotate 90 degrees:
     let columns = [[], [], [], [], [], [], [], [], []];
@@ -38,14 +36,14 @@ export default class SudokuModel {
         columns[i] = [...columns[i], el];
       });
     });
-    
-    // shuffle again:
+
+    // shuffle rows per each third:
     grid = [
       ...this.shuffle(columns.slice(0, 3), 3),
       ...this.shuffle(columns.slice(3, 6), 3),
       ...this.shuffle(columns.slice(6), 3),
     ];
-    
+
     this.solution = grid;
   }
 

@@ -3,6 +3,18 @@ import Classes from './Cell.module.css';
 
 import SubCell from './SubCell/SubCell';
 
+// boolean for grid visibility (checkered pattern):
+const isDark = coord => {
+  const inCornerSquare = [0, 1, 2, 6, 7, 8].includes(coord[0]) &&
+  [0, 1, 2, 6, 7, 8].includes(coord[0]) &&
+    [0, 1, 2, 6, 7, 8].includes(coord[1]);
+
+  const inCenterSquare = [3, 4, 5].includes(coord[0]) &&
+  [3, 4, 5].includes(coord[1]);
+
+  return inCornerSquare || inCenterSquare;
+}
+
 const Cell = props => {
   const [isFilled, setIsFilled] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
@@ -74,6 +86,7 @@ const Cell = props => {
     const wrongValue = props.diff.some((coord) => coord[0] === props.coord[0] && coord[1] === props.coord[1]);
     if (props.fullBoard && wrongValue) return 'rgba(255, 0, 0, 0.1)'
     if (props.fullBoard && props.diff.length === 0) return 'rgba(47, 188, 44, 0.1)';
+    if (!isDark(props.coord)) return '#1a1a1a';
   }
 
   let color = isEditable ? '#21ffda' : '#636363';
